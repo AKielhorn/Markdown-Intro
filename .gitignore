@@ -1,0 +1,16 @@
+.DS_Store
+*.pdf
+*.log
+*.aux
+*.zip
+*.bbl
+*.blg
+*.out
+*.synctex.gz
+*.fdb_latexmk
+*.run.xml
+*.html
+*.txt
+*.epub
+*.odt
+*.mobi

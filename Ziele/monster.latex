@@ -1,0 +1,312 @@
+\documentclass[$if(fontsize)$$fontsize$$endif$]{$documentclass$}
+
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifxetex
+  \usepackage{fontspec,xltxtra,xunicode}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+%  \setmainfont{Cardo}
+$if(lang)$
+  \usepackage{polyglossia}
+  \usepackage{ifthen}
+\ifthenelse{\equal{$lang$}{british}\OR\equal{$lang$}{UKenglish}}
+  {\setmainlanguage[%
+  	variant=british
+	]{english}
+  }{}
+\ifthenelse{\equal{$lang$}{american}\OR\equal{$lang$}{USenglish}}
+  {\setmainlanguage[%
+  	variant=american
+	]{english}
+  }{}
+\ifthenelse{\equal{$lang$}{german}}
+  {\setmainlanguage[%
+  	spelling=old,
+  	latesthyphen=true,%false
+	babelshorthands=true,%false
+	]{german}
+  }{}
+\ifthenelse{\equal{$lang$}{ngerman}}
+  {\setmainlanguage[%
+  	spelling=new,
+  	latesthyphen=true,%false
+	babelshorthands=true,%false
+	]{german}
+  }{}
+$endif$
+  \usepackage{xecolor}
+\else
+  \ifluatex
+    \usepackage{fontspec}
+    \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+%    \setmainfont{Cardo}
+$if(lang)$
+     \usepackage[$lang$]{babel}
+$endif$
+      \usepackage{color}
+  \else
+    \usepackage[utf8]{inputenc}
+    \usepackage[TS1,T1]{fontenc} % -ak- T1 für \textdblquotedown
+%   \usepackage{lmodern} % -ak-
+%   \usepackage{tgbonum}	% Bookman
+%   \usepackage{tgpagella}	% Palatino
+%   \usepackage{tgtermes}	% Times
+%   \usepackage{tgschola}	% Century Schoolbook
+%   \usepackage{iwona}	% 
+%   \usepackage{anttor}
+$if(lang)$
+    \usepackage[$lang$]{babel}
+$endif$
+    \usepackage{color}    
+  \fi
+\fi
+\ifx\KOMAClassName\undefined
+$if(pagesize)$ 
+\usepackage{ifthen}
+\ifthenelse{\equal{$pagesize$}{a5paper}}
+{
+\usepackage[a5paper]{geometry}
+}{}
+
+\ifthenelse{\equal{$pagesize$}{a6paper}}
+{
+\usepackage[a6paper]{geometry}
+}{}
+
+\ifthenelse{\equal{$pagesize$}{paperback}}
+{
+\usepackage[papersize=12cm,19cm]{geometry}
+}{}
+
+\ifthenelse{\equal{$pagesize$}{ebook}}
+{
+\usepackage[papersize=14,5cm,19cm]{geometry}
+}{}
+
+\ifthenelse{\equal{$pagesize$}{ebooksmall}}
+{
+\usepackage[papersize=9cm,11.5cm]{geometry}
+}{}
+$endif$
+\else
+
+$if(pagesize)$ 
+\usepackage{ifthen}
+\ifthenelse{\equal{$pagesize$}{a5paper}}
+{ \setlength{\paperwidth}{14.8cm}
+  \setlength{\paperheight}{21cm}
+  \typearea[2mm]{13}
+}{}
+
+\ifthenelse{\equal{$pagesize$}{a6paper}}
+{ \setlength{\paperwidth}{10.5cm}
+  \setlength{\paperheight}{14.8cm}
+  \typearea[2mm]{13}
+}{}
+
+\ifthenelse{\equal{$pagesize$}{paperback}}
+{ \setlength{\paperwidth}{12cm}
+  \setlength{\paperheight}{19cm}
+  \typearea[2mm]{12}
+}{}
+
+\ifthenelse{\equal{$pagesize$}{ebook}}
+{ \setlength{\paperwidth}{14,5cm}
+  \setlength{\paperheight}{19cm}
+  \typearea{13}
+}{}
+
+\ifthenelse{\equal{$pagesize$}{ebooksmall}}
+{ \setlength{\paperwidth}{9cm}
+  \setlength{\paperheight}{11,5cm}
+  \typearea{14}
+}{}
+$else$
+% Format A4
+  \setlength{\paperwidth}{21cm}
+  \setlength{\paperheight}{29.7cm}
+  \typearea[3mm]{13}
+$endif$
+
+%  \definecolor{gcolor}{cmyk}{0.9,0.6,0.0,0.1} % blue
+%  \definecolor{gcolor}{cmyk}{0.0,0.89,0.94,0.5} % red
+  \definecolor{gcolor}{rgb}{0,0,0} % black
+
+  \setkomafont{disposition}{\normalfont\color{gcolor}}
+%  \addtokomafont{pagefoot}{\color{gcolor}}
+  \addtokomafont{pagehead}{\color{gcolor}}
+  \addtokomafont{pagenumber}{\color{gcolor}}
+\fi
+
+\ifxetex
+\else
+\usepackage{microtype}
+\fi
+
+\raggedbottom
+\emergencystretch 0.8em
+
+$if(natbib)$
+\usepackage{natbib}
+\bibliographystyle{plainnat}
+$endif$
+$if(biblatex)$
+\usepackage{biblatex}
+$if(biblio-files)$
+\bibliography{$biblio-files$}
+$endif$
+$endif$
+$if(listings)$
+\usepackage{listings}
+$endif$
+$if(lhs)$
+\lstnewenvironment{code}{\lstset{language=Haskell,basicstyle=\small\ttfamily}}{}
+$endif$
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+$if(verbatim-in-note)$
+\usepackage{fancyvrb}
+$endif$
+$if(fancy-enums)$
+% Redefine labelwidth for lists; otherwise, the enumerate package will cause
+% markers to extend beyond the left margin.
+\makeatletter\AtBeginDocument{%
+  \renewcommand{\@listi}
+    {\setlength{\labelwidth}{4em}}
+}\makeatother
+\usepackage{enumerate}
+$endif$
+$if(tables)$
+\usepackage{ctable}
+\usepackage{float} % provides the H option for float placement
+$endif$
+$if(url)$
+\usepackage{url}
+$endif$
+$if(graphics)$
+\usepackage{graphicx}
+% We will generate all images so they have a width \maxwidth. This means
+% that they will get their normal width if they fit onto the page, but
+% are scaled down if they would overflow the margins.
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+\else\Gin@nat@width\fi}
+\makeatother
+\let\Oldincludegraphics\includegraphics
+\renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=\maxwidth]{#1}}
+$endif$
+\ifxetex
+  \usepackage[setpagesize=false, % page size defined by xetex
+              unicode=false, % unicode breaks when used with xetex
+              xetex]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
+\hypersetup{breaklinks=true, pdfborder={0 0 0}}
+$if(strikeout)$
+\usepackage[normalem]{ulem}
+% avoid problems with \sout in headers with hyperref:
+\pdfstringdefDisableCommands{\renewcommand{\sout}{}}
+$endif$
+$if(subscript)$
+\newcommand{\textsubscr}[1]{\ensuremath{_{\scriptsize\textrm{#1}}}}
+$endif$
+\ifx\KOMAClassName\undefined
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\fi
+$if(numbersections)$
+$else$
+\setcounter{secnumdepth}{0}
+$endif$
+$if(verbatim-in-note)$
+\VerbatimFootnotes % allows verbatim text in footnotes
+$endif$
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+$if(title)$
+\title{$title$}
+$endif$
+$if(author)$
+\author{$for(author)$$author$$sep$ \and $endfor$}
+$endif$
+$if(date)$
+\date{$date$}
+$endif$
+
+\begin{document}
+$if(title)$
+\maketitle
+$endif$
+
+$for(include-before)$
+$include-before$
+
+$endfor$
+$if(toc)$
+\tableofcontents
+$endif$
+$body$
+
+$if(natbib)$
+$if(biblio-files)$
+$if(biblio-title)$
+$if(book-class)$
+\renewcommand\bibname{$biblio-title$}
+$else$
+\renewcommand\refname{$biblio-title$}
+$endif$
+$endif$
+\bibliography{$biblio-files$}
+
+$endif$
+$endif$
+$if(biblatex)$
+\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+
+$endif$
+$for(include-after)$
+$include-after$
+
+$endfor$
+\end{document}
+
+\endinput
+This is an attempt at a super template for LaTeX
+It is best used in a makefile or a shell script,
+no-one can remember all these options and type them
+in every time pandoc is called.
+-- chapters
+    tell pandoc to use chapters instead of sections
+    (It is implied when documentclass is report/book/memoir/scrreprt/scrbook)
+-- toc
+	enable the \tableofcontents command
+--number-sections
+	numbered section
+--biblatex
+-V documentclass=<documentclass>
+	possible values for <documentclass> are
+	article (default)
+	book	(default when --chapters is used)
+	memoir	(not really supported)
+	scrartcl
+	scrreprt
+	scrbook
+-V pagesize=<pagesize>
+	possible values for <pagesize> are
+	a4paper
+	a5paper
+	a6paper
+	ebook		(14,5 cm x 19 cm, suitable for 10" display)
+	ebooksmall	(9 cm x 11,5 cm, suitable for 3,5" display)
+	paperback	(12 cm x 19 cm)
+-V lang=<language> 
+	possible values for <language> are
+	german
+	ngerman
+	british = UKenglish
+	american = USenglish
+
