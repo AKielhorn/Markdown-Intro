@@ -144,6 +144,25 @@ Anführungszeichen unten nicht enthält. Französische Anführungszeichen,
 «Das sind diese» funktionieren zwar ohne `fontenc`, das Ergebnis sieht
 aber furchtbar aus.
 
+Anführungszeichen führen noch zu einem weiteren Problem. Als TeX noch auf eine
+7-Bit Eingabekodierung beschränkt war, wurden einige Zeichen über Ligaturen eingegeben.
+Dazu zählten auch die englischen Anführungszeichen `` `` `` und `''`.
+Aus Kompatibilitätsgründen gibt Pandoc die Anführungszeichen immer noch so aus.
+In deutschen Texten werden die `` `` `` Zeichen als *schließende* Anführungszeichen verwendet.
+Endet nun ein Zitat mit einem `!` oder einem `?`, so greift ein anderer Ligaturmechanismus, 
+der die Kombination `` ! ` `` in ein `¡` und `` ? ` `` in ein `¿` umwandelt.
+Dies lässt sich umgehen, indem man bei der Eingabe `"` benutzt.
+Wenn im LaTeX template das Paket `csquotes` benutzt wird, werden die geraden Anführungsstriche in `\enquote`
+Befehle übsersetzt. In Verbindung mit der Option `german` werden daraus dann die richtigen Anführungsstriche.
+Bei anderen Formaten muss man damit leben, das hier englische Anführungsstriche verwendet werden.
+
+Alternativ kann man natürlich die LaTeX Datei mit `sed` bearbeiten und die Zeichen nach Unicode konvertieren.
+
+Bei der Verwendung von französischen Anführungszeichen gibt es keine Probleme.
+
+In späteren Pandoc Versionen wird dies wahrscheinlich konfigurierbar sein.
+
+
 Abkürzung
 ---------
 
