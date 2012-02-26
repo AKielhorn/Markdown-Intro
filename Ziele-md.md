@@ -757,7 +757,7 @@ steht, wird dieser als Link auf ein Bild interpretiert.
 
     ![Ein Blaues Bild](blau.jpg "Blaues Bild")
 
-Das Bild wird in einer `Figure`-Umgebung gesetzt, der Text in den
+Das Bild wird in einer `figure`-Umgebung gesetzt, der Text in den
 eckigen Klammern wird als Bildunterschrift verwendet.
 
 Möchte man das Bild im Fließtext einbinden, darf der Link nicht allein
@@ -888,7 +888,7 @@ die Standardmöglichkeiten ausreichen bietet Markdown als Eingabeformat nur
 Vorteile: weniger Tipparbeit, übersichtlicherer Text. Trotzdem befindet sich
 im Hintergrund ein komplettes LaTeX System, auf das jederzeit zurückgreifen
 kann. Zum Anpassen der Template Datei sind LaTeX Kenntnisse erforderlich und
-man sollte auch im Berieb einen LaTeX Experten zur Hand haben, falls es mal
+man sollte auch im Betrieb einen LaTeX Experten zur Hand haben, falls es mal
 hakt. Aber es hakt deutlich weniger, jedenfalls solange man auf rohes LaTeX
 verzichtet.
 
