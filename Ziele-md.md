@@ -119,7 +119,7 @@ Die `default-de.latex` Dateien
 
 Die mitgelieferte `default.latex` Datei ist eine Minimalversion. Für
 deutsche Texte empfiehlt sich die erweiterte `defaut-de.latex` Datei,
-die im Begleitmaterial [@Ziele-bm] zu finden ist. Die Änderungen zur
+die im Begleitmaterial [@Ziele-git] zu finden ist. Die Änderungen zur
 Originalversion sind durch ein `-ak-` gekennzeichnet.
 
 Seit Version 1.9 liefert Pandoc eine universelle Template-Datei mit.
@@ -955,7 +955,8 @@ Kommandozeilen.txt
 [^1]: pandoc ist unter GPL lizensiert.
 
 [^2]: Das Begleitmaterial zu diesem Artikel befindet sich auf
-    [@Ziele-bm].
+	[https://github.com/AKielhorn/Markdown-Intro/blob/master/Ziele.zip](https://github.com/AKielhorn/Markdown-Intro/blob/master/Ziele.zip)
+
 
 [^3]: Kindle ist wahrscheinlich ein eingetragenes Warenzeichen von
     Amazon, auch wenn ich auf den ersten Blick keinen entsprechenden
