@@ -4,15 +4,18 @@
 \ifxetex
   \usepackage{fontspec,xltxtra,xunicode}
   \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
   \usepackage{polyglossia} % -ak-
   \setmainlanguage{german} % -ak-
 \else
   \ifluatex
     \usepackage{fontspec}
     \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+    \newcommand{\euro}{€}
     \usepackage[ngerman]{babel} % -ak-
   \else
     \usepackage[utf8]{inputenc}
+    \usepackage{eurosym}
     \usepackage[TS1,T1]{fontenc} % -ak- T1 für \textdblquotedown
 %   \usepackage{lmodern} % -ak-
     \usepackage[ngerman]{babel} % -ak-

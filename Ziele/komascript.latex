@@ -8,6 +8,7 @@
 \ifxetex
   \usepackage{fontspec,xltxtra,xunicode}
   \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
 %  \setmainfont{Cardo}
   \usepackage{polyglossia} % -ak-
   \setmainlanguage[%
@@ -21,10 +22,12 @@
   \ifluatex
     \usepackage{fontspec}
     \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+    \newcommand{\euro}{€}
     \usepackage[ngerman]{babel} % -ak-
     \usepackage{color}
   \else
     \usepackage[utf8]{inputenc}
+    \usepackage{eurosym}
     \usepackage[TS1,T1]{fontenc} % -ak- T1 für \textdblquotedown
 %   \usepackage{lmodern} % -ak-
 %   \usepackage{tgbonum}	% Bookman
@@ -166,6 +169,8 @@ $endif$
 $if(date)$
 \date{$date$}
 $endif$
+
+\usepackage{csquotes}
 
 \begin{document}
 $if(title)$
