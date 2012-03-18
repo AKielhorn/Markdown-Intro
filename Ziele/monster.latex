@@ -7,6 +7,18 @@
   \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
   \newcommand{\euro}{€}
 %  \setmainfont{Cardo}
+$if(mainfont)$
+  \setmainfont{$mainfont$}
+$endif$
+$if(sansfont)$
+  \setsansfont{$sansfont$}
+$endif$
+$if(monofont)$
+  \setmonofont{$monofont$}
+$endif$
+$if(mathfont)$
+  \setmathfont{$mathfont$}
+$endif$
 $if(lang)$
   \usepackage{polyglossia}
   \usepackage{ifthen}
@@ -42,6 +54,18 @@ $endif$
     \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
     \newcommand{\euro}{€}
 %    \setmainfont{Cardo}
+$if(mainfont)$
+    \setmainfont{$mainfont$}
+$endif$
+$if(sansfont)$
+    \setsansfont{$sansfont$}
+$endif$
+$if(monofont)$
+    \setmonofont{$monofont$}
+$endif$
+$if(mathfont)$
+    \setmathfont{$mathfont$}
+$endif$
 $if(lang)$
      \usepackage[$lang$]{babel}
 $endif$
@@ -64,6 +88,7 @@ $endif$
   \fi
 \fi
 \ifx\KOMAClassName\undefined
+% Without KOMA Script
 $if(pagesize)$ 
 \usepackage{ifthen}
 \ifthenelse{\equal{$pagesize$}{a5paper}}
@@ -91,8 +116,16 @@ $if(pagesize)$
 \usepackage[papersize=9cm,11.5cm]{geometry}
 }{}
 $endif$
+% Memoir
+\makeatletter
+\@ifclassloaded{memoir}{
+   \setstocksize{\paperheight}{\paperwidth}
+   \settrimmedsize{\paperheight}{\paperwidth}{*}
+   \settrims{0pt}{0pt}
+}{}
+\makeatother
 \else
-
+% With Koma Script
 $if(pagesize)$ 
 \usepackage{ifthen}
 \ifthenelse{\equal{$pagesize$}{a5paper}}
