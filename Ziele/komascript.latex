@@ -55,6 +55,16 @@ $endif$
 $if(euro)$
     \usepackage{eurosym}
 $endif$
+    \usepackage[TS1,T1]{fontenc} % -ak- T1 für \textdblquotedown
+    \usepackage{lmodern} % -ak-
+%   \usepackage{tgbonum}	% Bookman
+%   \usepackage{tgpagella}	% Palatino
+%   \usepackage{tgtermes}	% Times
+%   \usepackage{tgschola}	% Century Schoolbook
+%   \usepackage{iwona}	% 
+%   \usepackage{anttor}
+    \usepackage[ngerman]{babel}
+    \usepackage{color}    
   \fi
 \fi
 % Format A4

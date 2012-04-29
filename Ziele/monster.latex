@@ -70,9 +70,6 @@ $endif$
 $if(mathfont)$
     \setmathfont{$mathfont$}
 $endif$
-$if(lang)$
-     \usepackage[$lang$]{babel}
-$endif$
       \usepackage{color}
   \else
     \usepackage[utf8]{inputenc}
@@ -87,9 +84,6 @@ $endif$
 %   \usepackage{tgschola}	% Century Schoolbook
 %   \usepackage{iwona}	% 
 %   \usepackage{anttor}
-$if(lang)$
-    \usepackage[$lang$]{babel}
-$endif$
     \usepackage{color}    
   \fi
 \fi
