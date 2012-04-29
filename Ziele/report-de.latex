@@ -17,8 +17,15 @@ $endif$
 $if(mathfont)$
   \setmathfont{$mathfont$}
 $endif$
+%  \setmainfont{Cardo}
   \usepackage{polyglossia} % -ak-
-  \setmainlanguage{german} % -ak-
+  \setmainlanguage[%
+  	spelling=new,%old
+  	latesthyphen=true,%false
+	babelshorthands=true,%false
+	]{german} % -ak-
+  %\setmainlanguage[variant=american]{english} % -ak-
+  \usepackage{xecolor}
 \else
   \ifluatex
     \usepackage{fontspec}
@@ -37,6 +44,7 @@ $if(mathfont)$
     \setmathfont{$mathfont$}
 $endif$
     \usepackage[ngerman]{babel} % -ak-
+    \usepackage{color}
   \else
     \usepackage[utf8]{inputenc}
     \usepackage{eurosym}
@@ -102,10 +110,16 @@ $endif$
   \usepackage[setpagesize=false, % page size defined by xetex
               unicode=false, % unicode breaks when used with xetex
               xetex,
+              bookmarks=true,
+              pdfauthor={$author-meta$},
+              pdftitle={$title-meta$},
               colorlinks=true,
               linkcolor=blue]{hyperref}
 \else
   \usepackage[unicode=true,
+              bookmarks=true,
+              pdfauthor={$author-meta$},
+              pdftitle={$title-meta$},
               colorlinks=true,
               linkcolor=blue]{hyperref}
 \fi

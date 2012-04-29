@@ -1,6 +1,11 @@
+% !TEX encoding = UTF-8 Unicode
+% !TEX TS-program = pdflatex
+% TEX TS-program = xelatex
+
 \documentclass[$if(fontsize)$$fontsize$,$endif$]{$documentclass$}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
 \ifxetex
   \usepackage{fontspec,xltxtra,xunicode}
   \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
@@ -17,8 +22,15 @@ $endif$
 $if(mathfont)$
   \setmathfont{$mathfont$}
 $endif$
+%  \setmainfont{Cardo}
   \usepackage{polyglossia} % -ak-
-  \setmainlanguage{german} % -ak-
+  \setmainlanguage[%
+  	spelling=new,%old
+  	latesthyphen=true,%false
+	babelshorthands=true,%false
+	]{german} % -ak-
+  %\setmainlanguage[variant=american]{english} % -ak-
+  \usepackage{xecolor}
 \else
   \ifluatex
     \usepackage{fontspec}
@@ -37,12 +49,12 @@ $if(mathfont)$
     \setmathfont{$mathfont$}
 $endif$
     \usepackage[ngerman]{babel} % -ak-
+    \usepackage{color}
   \else
     \usepackage[utf8]{inputenc}
+$if(euro)$
     \usepackage{eurosym}
-    \usepackage[TS1,T1]{fontenc} % -ak- T1 für \textdblquotedown
-%   \usepackage{lmodern} % -ak-
-    \usepackage[ngerman]{babel} % -ak-
+$endif$
   \fi
 \fi
 $if(geometry)$
@@ -102,11 +114,19 @@ $endif$
   \usepackage[setpagesize=false, % page size defined by xetex
               unicode=false, % unicode breaks when used with xetex
               xetex,
+              bookmarks=true,
+              pdfauthor={$author-meta$},
+              pdftitle={$title-meta$},
               colorlinks=true,
+              urlcolor=blue,
               linkcolor=blue]{hyperref}
 \else
   \usepackage[unicode=true,
+              bookmarks=true,
+              pdfauthor={$author-meta$},
+              pdftitle={$title-meta$},
               colorlinks=true,
+              urlcolor=blue,
               linkcolor=blue]{hyperref}
 \fi
 \hypersetup{breaklinks=true, pdfborder={0 0 0}}
@@ -114,9 +134,6 @@ $if(strikeout)$
 \usepackage[normalem]{ulem}
 % avoid problems with \sout in headers with hyperref:
 \pdfstringdefDisableCommands{\renewcommand{\sout}{}}
-$endif$
-$if(subscript)$
-\newcommand{\textsubscr}[1]{\ensuremath{_{\scriptsize\textrm{#1}}}}
 $endif$
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{6pt plus 2pt minus 1pt}

@@ -1,7 +1,11 @@
-\documentclass[$if(fontsize)$$fontsize$$endif$]{$documentclass$}
+% !TEX encoding = UTF-8 Unicode
+% !TEX TS-program = pdflatex
+% TEX TS-program = xelatex
 
+\documentclass[$if(fontsize)$$fontsize$$endif$]{$documentclass$}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
 \ifxetex
   \usepackage{fontspec,xltxtra,xunicode}
   \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
@@ -72,7 +76,9 @@ $endif$
       \usepackage{color}
   \else
     \usepackage[utf8]{inputenc}
+$if(euro)$
     \usepackage{eurosym}
+$endif$
     \usepackage[TS1,T1]{fontenc} % -ak- T1 für \textdblquotedown
 %   \usepackage{lmodern} % -ak-
 %   \usepackage{tgbonum}	% Bookman
@@ -175,12 +181,12 @@ $endif$
 \fi
 
 \ifxetex
+% \usepackage{microtype} % requires experimental microtype (not on CTAN)
 \else
 \usepackage{microtype}
 \fi
 
 \raggedbottom
-\emergencystretch 0.8em
 
 $if(natbib)$
 \usepackage{natbib}
@@ -235,9 +241,21 @@ $endif$
 \ifxetex
   \usepackage[setpagesize=false, % page size defined by xetex
               unicode=false, % unicode breaks when used with xetex
-              xetex]{hyperref}
+              xetex,
+              bookmarks=true,
+              pdfauthor={$author-meta$},
+              pdftitle={$title-meta$},
+              colorlinks=true,
+              urlcolor=blue,
+              linkcolor=blue]{hyperref}
 \else
-  \usepackage[unicode=true]{hyperref}
+  \usepackage[unicode=true,
+              bookmarks=true,
+              pdfauthor={$author-meta$},
+              pdftitle={$title-meta$},
+              colorlinks=true,
+              urlcolor=blue,
+              linkcolor=blue]{hyperref}
 \fi
 \hypersetup{breaklinks=true, pdfborder={0 0 0}}
 $if(strikeout)$
@@ -245,13 +263,11 @@ $if(strikeout)$
 % avoid problems with \sout in headers with hyperref:
 \pdfstringdefDisableCommands{\renewcommand{\sout}{}}
 $endif$
-$if(subscript)$
-\newcommand{\textsubscr}[1]{\ensuremath{_{\scriptsize\textrm{#1}}}}
-$endif$
 \ifx\KOMAClassName\undefined
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{6pt plus 2pt minus 1pt}
 \fi
+\setlenght{\emergencystretch}{0.8em}
 $if(numbersections)$
 $else$
 \setcounter{secnumdepth}{0}

@@ -5,10 +5,23 @@
 \documentclass[pagesize$if(fontsize)$,$fontsize$$endif$]{scrartcl}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
 \ifxetex
   \usepackage{fontspec,xltxtra,xunicode}
   \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
   \newcommand{\euro}{€}
+$if(mainfont)$
+  \setmainfont{$mainfont$}
+$endif$
+$if(sansfont)$
+  \setsansfont{$sansfont$}
+$endif$
+$if(monofont)$
+  \setmonofont{$monofont$}
+$endif$
+$if(mathfont)$
+  \setmathfont{$mathfont$}
+$endif$
 %  \setmainfont{Cardo}
   \usepackage{polyglossia} % -ak-
   \setmainlanguage[%
@@ -23,22 +36,25 @@
     \usepackage{fontspec}
     \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
     \newcommand{\euro}{€}
+$if(mainfont)$
+    \setmainfont{$mainfont$}
+$endif$
+$if(sansfont)$
+    \setsansfont{$sansfont$}
+$endif$
+$if(monofont)$
+    \setmonofont{$monofont$}
+$endif$
+$if(mathfont)$
+    \setmathfont{$mathfont$}
+$endif$
     \usepackage[ngerman]{babel} % -ak-
     \usepackage{color}
   \else
     \usepackage[utf8]{inputenc}
+$if(euro)$
     \usepackage{eurosym}
-    \usepackage[TS1,T1]{fontenc} % -ak- T1 für \textdblquotedown
-%   \usepackage{lmodern} % -ak-
-%   \usepackage{tgbonum}	% Bookman
-%   \usepackage{tgpagella}	% Palatino
-%   \usepackage{tgtermes}	% Times
-%   \usepackage{tgschola}	% Century Schoolbook
-%   \usepackage{iwona}	% 
-%   \usepackage{bsabon}
-%   \usepackage{anttor}
-    \usepackage[ngerman]{babel} % -ak-
-    \usepackage{color}    
+$endif$
   \fi
 \fi
 % Format A4
@@ -133,18 +149,27 @@ $endif$
 \ifxetex
   \usepackage[setpagesize=false, % page size defined by xetex
               unicode=false, % unicode breaks when used with xetex
-              xetex]{hyperref}
+              xetex,
+              bookmarks=true,
+              pdfauthor={$author-meta$},
+              pdftitle={$title-meta$},
+              colorlinks=true,
+              urlcolor=blue,
+              linkcolor=blue]{hyperref}
 \else
-  \usepackage[unicode=true]{hyperref}
+  \usepackage[unicode=true,
+              bookmarks=true,
+              pdfauthor={$author-meta$},
+              pdftitle={$title-meta$},
+              colorlinks=true,
+              urlcolor=blue,
+              linkcolor=blue]{hyperref}
 \fi
 \hypersetup{breaklinks=true, pdfborder={0 0 0}}
 $if(strikeout)$
 \usepackage[normalem]{ulem}
 % avoid problems with \sout in headers with hyperref:
 \pdfstringdefDisableCommands{\renewcommand{\sout}{}}
-$endif$
-$if(subscript)$
-\newcommand{\textsubscr}[1]{\ensuremath{_{\scriptsize\textrm{#1}}}}
 $endif$
 % \setlength{\parindent}{0pt}
 % \setlength{\parskip}{6pt plus 2pt minus 1pt}
