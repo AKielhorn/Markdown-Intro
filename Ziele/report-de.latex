@@ -3,7 +3,7 @@
 \usepackage{ifxetex,ifluatex}
 \ifxetex
   \usepackage{fontspec,xltxtra,xunicode}
-  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
   \newcommand{\euro}{€}
 $if(mainfont)$
   \setmainfont{$mainfont$}
@@ -29,7 +29,7 @@ $endif$
 \else
   \ifluatex
     \usepackage{fontspec}
-    \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+    \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
     \newcommand{\euro}{€}
 $if(mainfont)$
     \setmainfont{$mainfont$}
