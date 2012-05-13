@@ -1,4 +1,5 @@
 # Makefile for pandoc 1.9
+# --no-tex-ligatures ab pandoc 1.9.3
 PANDOC=~/.cabal/bin/pandoc
 DOC=md-test
 QUELLEN=$(DOC).md $(DOC).bib blau.jpg rot.png cover-image.gif
@@ -31,7 +32,7 @@ $(DOC).txt:	$(QUELLEN)
 %.tex:	%.md %.bib default-de.latex
 	$(PANDOC) -f markdown $*.md -t latex -V documentclass=article --template=./default-de.latex --bibliography $*.bib --biblatex -o $*.tex
 #	Standard template aus pandoc 1.9
-#	$(PANDOC) -f markdown $*.md -t latex -V documentclass=article -V lang=ngerman -s --bibliography $*.bib --biblatex -o $*.tex
+#	$(PANDOC) -f markdown $*.md -t latex -V documentclass=article -V lang=ngerman --no-tex-ligatures -s --bibliography $*.bib --biblatex -o $*.tex
 
 $(DOC).pdf:	$(DOC).tex
 	latexmk -pdf $(DOC)

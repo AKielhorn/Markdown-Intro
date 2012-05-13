@@ -160,8 +160,13 @@ Alternativ kann man natürlich die LaTeX Datei mit `sed` bearbeiten und die Zeic
 
 Bei der Verwendung von französischen Anführungszeichen gibt es keine Probleme.
 
-In späteren Pandoc Versionen wird dies wahrscheinlich konfigurierbar sein.
-
+Seit pandoc 1.9.3 gibt es einen neuen Schalter `--no-tex-ligatures` mit dem die Übersetzung von Unicode-Zeichen
+in TeX-Ligaturen abgeschaltet werden kann.
+`„` und `“`  werden dann unverändert in den TeX Text übernommen.
+Gleichzeitig wird die Übersetzung von `--` in `–` und `---` in `—` abgeschaltet.
+Diese Zeichen müssen dann durch TeX konvertiert werden.
+Bei `pdflatex` ist das standardmäßig der Fall, bei `XeTeX` und `LuaTeX` muss die `fontspec` Option `Ligatures=TeX` 
+gesetzt werden.
 
 Abkürzung
 ---------
