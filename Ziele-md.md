@@ -41,7 +41,8 @@ kann pandoc sie verstehen und konvertieren. Aber was ist zu kompliziert?
 Am einfachsten konvertiert man ein Dokument von LaTeX nach LaTeX und
 sieht was übrig bleibt.
 
-    pandoc -f latex -t latex --template=./default-de.latex -o quelle-pd.tex quelle.tex
+    pandoc -f latex -t latex --template=./default-de.latex 
+    -o quelle-pd.tex quelle.tex
 
 Dieser Befehl benutzt eine an die deutsche Sprache angepasste Version
 der Standardvorlage `default.latex` um eine neue LaTeX-Datei zu
