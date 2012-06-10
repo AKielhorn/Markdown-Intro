@@ -30,9 +30,9 @@ $(DOC).txt:	$(QUELLEN)
 	$(PANDOC) -f markdown -t plain -s $(DOC).md --bibliography $(DOC).bib -o $(DOC).txt
 
 %.tex:	%.md %.bib default-de.latex
-	$(PANDOC) -f markdown $*.md -t latex -V documentclass=article --template=./default-de.latex --bibliography $*.bib --biblatex -o $*.tex
+	$(PANDOC) -f markdown $*.md -t latex -V documentclass=article --no-tex-ligatures -S --template=./default-de.latex --bibliography $*.bib --biblatex -o $*.tex
 #	Standard template aus pandoc 1.9
-#	$(PANDOC) -f markdown $*.md -t latex -V documentclass=article -V lang=ngerman --no-tex-ligatures -s --bibliography $*.bib --biblatex -o $*.tex
+#	$(PANDOC) -f markdown $*.md -t latex -V documentclass=article -V lang=ngerman --no-tex-ligatures -S -s --bibliography $*.bib --biblatex -o $*.tex
 
 $(DOC).pdf:	$(DOC).tex
 	latexmk -pdf $(DOC)
@@ -79,3 +79,7 @@ distclean:
 	rm $(DOC).tex
 	rm $(DOC).epub
 	rm $(DOC).odt
+
+
+# pandoc -f markdown -t latex -o Ziele-md.tex --no-tex-ligatures -S --template=Ziele-md.latex --bibliography Ziele-md.bib --csl=Ziele.csl Ziele-md.md 
+
