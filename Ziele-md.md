@@ -1,6 +1,6 @@
 % Viele Ziele Veröffentlichung
 % Axel Kielhorn
-% 2012-02-12
+% 2012-06-09
 
 Anmerkung
 =========
@@ -136,7 +136,7 @@ werden, das ein vollständiges Dokument erstellt werden soll.
 
 Leider fehlt in der offiziellen `default.latex` Datei die Zeile
 
-        \usepackage[TS1,T1]{fontenc}
+    \usepackage[T1]{fontenc}
 
 daher ist `default-de.latex` immer noch erforderlich.
 
@@ -144,6 +144,14 @@ Die `T1` Zeichensatzkodierung ist notwendig, da `OT1` die
 Anführungszeichen unten nicht enthält. Französische Anführungszeichen,
 «Das sind diese» funktionieren zwar ohne `fontenc`, das Ergebnis sieht
 aber furchtbar aus.
+
+Mit Version 1.9.4 wurde die template Datei erweitert und enthält nun die Zeilen
+
+    \usepackage[T1]{fontenc}
+    \usepackage{lmodern}
+
+Damit ist die Datei  `default-de.latex` nicht mehr erforderlich, alle
+Einstellungen können über Variablen vorgenommen werden.
 
 Anführungszeichen führen noch zu einem weiteren Problem. Als TeX noch auf eine
 7-Bit Eingabekodierung beschränkt war, wurden einige Zeichen über Ligaturen eingegeben.
@@ -168,6 +176,11 @@ Gleichzeitig wird die Übersetzung von `--` in `–` und `---` in `—` abgescha
 Diese Zeichen müssen dann durch TeX konvertiert werden.
 Bei `pdflatex` ist das standardmäßig der Fall, bei `XeTeX` und `LuaTeX` muss die `fontspec` Option `Ligatures=TeX` 
 gesetzt werden.
+
+Dieser Schalter schaltet auch die Option `--smart` ab.
+Schreibmaschinenanführungszeichen `"` werden dann nicht mehr in
+typographische Anführungszeichen konvertiert. Möchte man diese Funktion
+erhalten, so ist die Option `--smart` (Kurzform `-S`) zusätzlich anzugeben.
 
 Abkürzung
 ---------
@@ -478,11 +491,11 @@ Folgeabsätze mit 4 Leerzeichen oder einem Tabulatorschritt einzurücken.
         - drei b
     * vier
 
-	Wie immer verstecken wir die wichtigen Informationen ganz
-	unten, in der Hoffnung, das niemand sie liest.
+    Wie immer verstecken wir die wichtigen Informationen ganz
+    unten, in der Hoffnung, das niemand sie liest.
         
-	Um ganz sicher zu gehen, erwähnen wir erst im letzten Absatz
-	die vier Leerzeichen Regel.
+    Um ganz sicher zu gehen, erwähnen wir erst im letzten Absatz
+    die vier Leerzeichen Regel.
 
 ### Die `enumerate` Liste
 
@@ -961,7 +974,7 @@ Kommandozeilen.txt
 [^1]: pandoc ist unter GPL lizensiert.
 
 [^2]: Das Begleitmaterial zu diesem Artikel befindet sich auf
-	[https://github.com/AKielhorn/Markdown-Intro/blob/master/Ziele.zip](https://github.com/AKielhorn/Markdown-Intro/blob/master/Ziele.zip)
+    [https://github.com/AKielhorn/Markdown-Intro/blob/master/Ziele.zip](https://github.com/AKielhorn/Markdown-Intro/blob/master/Ziele.zip)
 
 
 [^3]: Kindle ist wahrscheinlich ein eingetragenes Warenzeichen von
