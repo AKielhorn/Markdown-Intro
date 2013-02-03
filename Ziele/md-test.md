@@ -61,7 +61,7 @@ Body
 
 Ende der ersten Liste.
 
-* ein
+* eins
 * zwei
 * drei
 	- drei a
@@ -70,13 +70,13 @@ Ende der ersten Liste.
 
     Wie immer verstecken wir die wichtigen Informationen ganz unten,
     in der Hoffnung, das niemand sie liest.
-    
+  
     Um ganz sicher zu gehen, erwähnen wir erst im letzten Absatz die
     vier Leerzeichen Regel.
 
 Eine Liste mit Aufzählung:
 
-1. ein
+1. eins
 2. zwei
 4. drei
 	a) drei a
@@ -85,6 +85,15 @@ Eine Liste mit Aufzählung:
   Wie immer verstecken wir die wichtigen Informationen ganz unten,
   in der Hoffnung, das niemand sie liest.
 
+Bei römischen Zahlen gibt es eine Besonderheit:
+
+1. eins
+2. zwei
+    I.  Zwei Leerzeichen nach dem Punkt
+    II.  Zwei Leerzeichen nach dem Punkt, ist hier nicht notwendig
+3. drei
+    i. Hier ist kein doppeltes Leerzeichen erforderlich
+    ii. Hier auch nicht
 
 Eine Liste mit Aufzählung (default Zeichen):
 

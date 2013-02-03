@@ -1,6 +1,6 @@
 % Viele Ziele Veröffentlichung
 % Axel Kielhorn
-% 2012-06-09
+% 2013-02-03
 
 Anmerkung
 =========
@@ -517,6 +517,21 @@ Dokumentklasse benutzt.
     5. vier
       Wie immer verstecken wir die wichtigen Informationen ganz unten,
       in der Hoffnung, das niemand sie liest.
+
+Pandoc kann auch Listen mit römischen Zahlen nummerieren, dabei gibt es
+jedoch einen Stolperstein: Damit nicht abgekürzte Vornamen die zufällig
+am Anfang einer Zeile stehen als Aufzählzeichen für eine Liste erkannt
+werden, ist bei den Zahlen I, V, X, C, D und M ein doppeltes Leerzeichen
+erforderlich. Bei Kleinbuchstaben ist das nicht notwendig.
+
+    1. ein
+    2. zwei
+    4. drei
+        I.  drei a (mit doppeltem Leerzeichen)
+        II.  drei b
+    5. vier
+        i. vier a (ohne doppeltes Leerzeichen)
+        ii. vier b
 
 ### Die `description` Liste
 
