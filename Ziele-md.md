@@ -509,6 +509,9 @@ verhindern, so kann man stattdessen die Aufzählungspunkte mit `#.`
 markieren, dann wird die Standardeinstellung der verwendeten
 Dokumentklasse benutzt.
 
+Ab Version 1.10 wird das `enumerate`-Paket nicht mehr benötigt, die
+Anpassungen erfolgen direkt im TeX-Code.
+
     1. ein
     2. zwei
     4. drei
