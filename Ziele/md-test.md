@@ -39,6 +39,10 @@ Zweite und letzte Ebene
 > Sollte ein Editor nicht über diese Funktion verfügen,
 reicht es, nur die erste Zeile eines Absatzes zu markieren.
 
+| Vom Eise befreit sind Straßen und Wege,
+| Durch des Salzes ätzende Kraft.
+|     Und so weiter.
+
     \documentclass[11,ngerman]{dtk}
     \usepackage[utf8]{inputenc}
 

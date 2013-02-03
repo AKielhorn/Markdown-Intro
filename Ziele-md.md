@@ -422,6 +422,17 @@ Zitiert wird wie in (alten) E-Mail Programmen mit einem `>`
     > Sollte ein Editor nicht über diese Funktion verfügen,
     reicht es, nur die erste Zeile eines Absatzes zu markieren.
 
+Der Text wird dabei normal umgebrochen. Möchte man den Zeilenumbruch der
+Quelldatei im fertigen Dokument erhalten, so gibt es dafür den
+Zeilenblock. Er wird durch `| ` eingeleitet. Somit lassen sich Gedichte
+formatieren. Leerzeichen am Zeilenanfang bleiben erhalten.
+Anders als Programmlisings, die in Schreibmaschinenschrift
+gesetzt werden, wird hier die normale Textschrift benutzt.
+
+    | Vom Eise befreit sind Straßen und Wege,
+    | Durch des Salzes ätzende Kraft.
+    |     Und so weiter.
+
 Eine besondere Form von Zitaten sind Zitate aus Programmen. Diese werden
 standardmäßig in einer nichtproportionalen Schrift gesetzt.
 Programmzitate werden durch 4 Leerzeichen oder einen Tabulatorschritt
