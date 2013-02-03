@@ -464,14 +464,21 @@ Liste der unterstützten Sprachen erhält man mit:
 
     pandoc -v
 
-Die Sprache teilt man dem Listing mit:
+Die Sprache teilt man dem Listing mit, außerdem ist es möglich die Zeilen zu
+nummerieren:
 
-    ~~~~~~~~{.Latex}
+    ~~~~~~~~{.Latex .numberLines startFrom="10"}
     \documentclass[11,ngerman]{dtk}
     \usepackage[utf8]{inputenc}
     ~~~~~~~~
 
 Mit dem Schalter `--no-highlight` kann man die Hervorhebung abschalten.
+
+Mit dem Schalter `--highlight-style` lassen sich verschiedene Stile
+auswählen. Zur Auswahl stehen: *pygments* (the default), *kate*,
+*monochrome*, *espresso*, *zenburn*, *haddock*, und *tango*.
+
+Die Hervorhebung funktioniert nur bei den Ausgabeformaten `HTML` und `LaTeX`.
 
 Listen
 ------

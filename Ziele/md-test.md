@@ -46,6 +46,15 @@ reicht es, nur die erste Zeile eines Absatzes zu markieren.
     \documentclass[11,ngerman]{dtk}
     \usepackage[utf8]{inputenc}
 
+~~~~ {.latex .numberLines startFrom="10"}
+\documentclass[11,ngerman]{dtk}
+\usepackage[utf8]{inputenc}
+% Kommentar
+\begin{document}
+Text
+\end{document}
+~~~~
+
 ~~~~~~~~
 Dies ist ein Programm Listing
 ~~~~
