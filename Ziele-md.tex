@@ -58,8 +58,16 @@
      emphstyle=\DTK@lst@colorbox{lightgray},
      prebreak=,
      postbreak=\mbox{\ensuremath{\hookrightarrow}},
-     literate={ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
-       {Ä}{{\"A}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1 {ß}{\ss}1
+     literate={ä}{{\"a}}1
+              {ö}{{\"o}}1 
+              {ü}{{\"u}}1
+              {Ä}{{\"A}}1
+              {Ö}{{\"O}}1
+              {Ü}{{\"U}}1
+              {ß}{\ss}1
+              {”}{''}1
+              {“}{\grqq}1
+              {„}{\glqq}1
 }
 
 \lstdefinestyle{DTKlstNoNumber}{%
@@ -306,6 +314,26 @@ Schreibmaschinenanführungszeichen \texttt{"} werden dann nicht mehr in
 typographische Anführungszeichen konvertiert. Möchte man diese Funktion
 erhalten, so ist die Option \texttt{-{}-smart} (Kurzform \texttt{-S})
 zusätzlich anzugeben.
+
+Eine einfache Möglichkeit, die komfortable Eingabe von \texttt{"} zu
+nutzen und gleichzeitig richtige Anführungszeichen im Zieldokument zu
+erhalten ist:
+
+\begin{verbatim}
+pandoc --smart file.md -t markdown 
+| sed -f smart2de 
+| pandoc -f markdown -o file.epub
+\end{verbatim}
+
+Die Datei \texttt{smart2de} enthält die folgenden Befehle:
+
+\begin{verbatim}
+s/“/„/g
+s/”/“/g
+\end{verbatim}
+
+Natürlich kann man alternativ auch \texttt{»} und \texttt{«} als
+Ersetzungstext benutzen
 
 \subsection{Abkürzung}
 
@@ -584,6 +612,19 @@ Zitiert wird wie in (alten) E-Mail Programmen mit einem
 reicht es, nur die erste Zeile eines Absatzes zu markieren.
 \end{verbatim}
 
+Der Text wird dabei normal umgebrochen. Möchte man den Zeilenumbruch der
+Quelldatei im fertigen Dokument erhalten, so gibt es dafür den
+Zeilenblock. Er wird durch \texttt{\textbar{}} eingeleitet. Somit lassen
+sich Gedichte formatieren. Leerzeichen am Zeilenanfang bleiben erhalten.
+Anders als Programmlisings, die in Schreibmaschinenschrift gesetzt
+werden, wird hier die normale Textschrift benutzt.
+
+\begin{verbatim}
+| Vom Eise befreit sind Straßen und Wege,
+| Durch des Salzes ätzende Kraft.
+|     Und so weiter.
+\end{verbatim}
+
 Eine besondere Form von Zitaten sind Zitate aus Programmen. Diese werden
 standardmäßig in einer nichtproportionalen Schrift gesetzt.
 Programmzitate werden durch 4 Leerzeichen oder einen Tabulatorschritt
@@ -622,10 +663,11 @@ Liste der unterstützten Sprachen erhält man mit:
 pandoc -v
 \end{verbatim}
 
-Die Sprache teilt man dem Listing mit:
+Die Sprache teilt man dem Listing mit, außerdem ist es möglich die
+Zeilen zu nummerieren:
 
 \begin{verbatim}
-~~~~~~~~{.Latex}
+~~~~~~~~{.Latex .numberLines startFrom="10"}
 \documentclass[11,ngerman]{dtk}
 \usepackage[utf8]{inputenc}
 ~~~~~~~~
@@ -633,6 +675,14 @@ Die Sprache teilt man dem Listing mit:
 
 Mit dem Schalter \texttt{-{}-no-highlight} kann man die Hervorhebung
 abschalten.
+
+Mit dem Schalter \texttt{-{}-highlight-style} lassen sich verschiedene
+Stile auswählen. Zur Auswahl stehen: \emph{pygments} (the default),
+\emph{kate}, \emph{monochrome}, \emph{espresso}, \emph{zenburn},
+\emph{haddock}, und \emph{tango}.
+
+Die Hervorhebung funktioniert nur bei den Ausgabeformaten \texttt{HTML}
+und \texttt{LaTeX}.
 
 \subsection{Listen}
 
@@ -730,7 +780,8 @@ Beschreibung, sonst wird u.U. der letzte Punkt der Liste anders
 formatiert als die übrigen Punkte.
 
 Beim OpenDocument- oder LaTeX-Export werden beide Fälle gleich
-behandelt.
+behandelt. Ab Version 1.10 wird auch beim LaTeX-Export zwischen
+kompakten Listen und Listen mit mehr Freiraum unterschieden.
 
 \begin{verbatim}
 Gelse
@@ -792,6 +843,15 @@ und erfordert daher keinen zweiten LaTeX-Lauf.
 
 Seit Version 1.8.1.2 werden Tabellen mit dem \texttt{ctable}-Paket
 gesetzt. Dadurch hat sich die Qualität der Ausgabe erheblich verbessert.
+
+Mit der Version 1.10 wurde auf \texttt{longtable} umgestellt. Dadurch
+sind Tabellen keine Gleitobjetke mehr sondern erscheinen dort wo sie
+definiert wurden. Lange Tabellen werden am Seitenende umgebrochen.
+Leider landen dadurch auch manchmal Teile von kurzen Tabellen auf der
+nächsten Seite.
+
+Die \texttt{longtable} Umgebung ist nicht mit \texttt{beamer}
+kompatibel, nach einer Lösung wird noch gesucht.
 
 Es gibt drei Arten von Tabellen. Bei der Eingabe von Tabellen sollte man
 auf Tabulatoren verzichten und die Spalten mit Leerzeichen ausrichten.
@@ -863,6 +923,21 @@ Tabellenzellen können z. B. enthalten sein.
 | Orange                | $2.10        | - heilt Scorbut         |
 |                       |              | - ist lecker            |
 +-----------------------+--------------+-------------------------+
+\end{verbatim}
+
+Mit Version 1.10 wurde ein vierter Tabellentyp eingeführt, die
+Pipe-Tabelle. (Pipe ist ein englischer Name für das \texttt{\textbar{}}
+Zeichen.) Die Ausrichtung der Zellen wird durch den \texttt{:} bestimmt.
+Die Kopfzeile darf leer sein, die Zeile mit den \texttt{-} Zeichen
+jedoch nicht, da sie die Ausrichtung definiert. Die \texttt{\textbar{}}
+Zeichen in der ersten und letzten Spalte sind optional.
+
+\begin{verbatim}
+| Rechts | Links | Standard | Zentriert | 
+|-------:|:------|----------|:---------:| 
+|    12  | 12    | 12       |     12    | 
+|   123  | 123   | 123      |    123    |
+|     1  | 1     | 1        |     1     |
 \end{verbatim}
 
 \subsection{Titelei}
@@ -1045,6 +1120,16 @@ pandoc -f markdown -t latex --toc -o quelle.tex quelle.md
 \end{verbatim}
 
 das Inhaltsverzeichnis. Beides kann man natürlich auch kombinieren.
+
+Die Tiefe des Inhaltsverzeichnisses kann man ab Version 1.10
+beeinflussen:
+
+\begin{verbatim}
+ pandoc -f markdown -t latex --toc-depth=3 -o quelle.tex quelle.md
+\end{verbatim}
+
+Die Option \texttt{-{}-toc} wird dabei implizit gesetzt, muss also nicht
+angegeben werden. Das funktioniert auch bei HTML und epub.
 
 \section{\ldots{}~oder ganze Bücher}
 
