@@ -182,6 +182,20 @@ Schreibmaschinenanführungszeichen `"` werden dann nicht mehr in
 typographische Anführungszeichen konvertiert. Möchte man diese Funktion
 erhalten, so ist die Option `--smart` (Kurzform `-S`) zusätzlich anzugeben.
 
+Eine einfache Möglichkeit, die komfortable Eingabe von `"` zu nutzen und
+gleichzeitig richtige Anführungszeichen im Zieldokument zu erhalten ist:
+
+    pandoc --smart file.md -t markdown 
+    | sed -f smart2de 
+    | pandoc -f markdown -o file.epub
+
+Die Datei `smart2de` enthält die folgenden Befehle:
+
+    s/“/„/g
+    s/”/“/g
+
+Natürlich kann man alternativ auch `»` und `«` als Ersetzungstext benutzen
+
 Abkürzung
 ---------
 

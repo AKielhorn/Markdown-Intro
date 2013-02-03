@@ -66,8 +66,16 @@ $endif$
      emphstyle=\DTK@lst@colorbox{lightgray},
      prebreak=,
      postbreak=\mbox{\ensuremath{\hookrightarrow}},
-     literate={ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
-       {Ä}{{\"A}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1 {ß}{\ss}1
+     literate={ä}{{\"a}}1
+              {ö}{{\"o}}1 
+              {ü}{{\"u}}1
+              {Ä}{{\"A}}1
+              {Ö}{{\"O}}1
+              {Ü}{{\"U}}1
+              {ß}{\ss}1
+              {”}{''}1
+              {“}{\grqq}1
+              {„}{\glqq}1
 }
 
 \lstdefinestyle{DTKlstNoNumber}{%
