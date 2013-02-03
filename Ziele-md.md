@@ -627,6 +627,14 @@ Tabellen
 Seit Version 1.8.1.2 werden Tabellen mit dem `ctable`-Paket gesetzt.
 Dadurch hat sich die Qualität der Ausgabe erheblich verbessert.
 
+Mit der Version 1.10 wurde auf `longtable` umgestellt. Dadurch sind Tabellen
+keine Gleitobjetke mehr sondern erscheinen dort wo sie definiert wurden.
+Lange Tabellen werden am Seitenende umgebrochen. Leider landen dadurch auch
+manchmal Teile von kurzen Tabellen auf der nächsten Seite.
+
+Die `longtable` Umgebung ist nicht mit `beamer` kompatibel, nach einer
+Lösung wird noch gesucht.
+
 Es gibt drei Arten von Tabellen. Bei der Eingabe von Tabellen sollte man
 auf Tabulatoren verzichten und die Spalten mit Leerzeichen ausrichten.
 
