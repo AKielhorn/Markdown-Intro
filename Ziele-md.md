@@ -683,6 +683,20 @@ Tabellenzellen können z. B. enthalten sein.
     |                       |              | - ist lecker            |
     +-----------------------+--------------+-------------------------+
 
+Mit Version 1.10 wurde ein vierter Tabellentyp eingeführt, die
+Pipe-Tabelle. (Pipe ist ein englischer Name für das `|` Zeichen.) Die
+Ausrichtung der Zellen wird durch den `:` bestimmt. Die Kopfzeile darf
+leer sein, die Zeile mit den `-` Zeichen jedoch nicht, da sie die
+Ausrichtung definiert. Die `|` Zeichen in der ersten und letzten Spalte
+sind optional.
+
+	| Rechts | Links | Standard | Zentriert | 
+	|-------:|:------|----------|:---------:| 
+	|    12  | 12    | 12       |     12    | 
+	|   123  | 123   | 123      |    123    |
+	|     1  | 1     | 1        |     1     |
+
+
 Titelei
 -------
 

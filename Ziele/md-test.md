@@ -146,9 +146,9 @@ Die Behauptung (@Behauptung) wird in (@Beweis) bewiesen.
 
  Rechts   Links    Mitte   Standard
 -------   ------  -------  --------
-     12   12        12           12
-    123   123       123         123
-    ab    ab        ab          ab
+     12   12        12     12
+    123   123       123    123
+    ab    ab        ab     ab
 
 Table: Eine einfache Tabelle
 
@@ -165,6 +165,8 @@ Table: Eine einfache Tabelle
                                                Leerzeile abgetrennt
 ------------------------------------------------------------------------
 
+ : Eine Tabelle mit aufwändiger Formatierung
+
 +-------------------------+----------------+-------------------------+
 | Frucht                  | Preis          | Vorteile                |
 +=========================+================+=========================+
@@ -174,6 +176,16 @@ Table: Eine einfache Tabelle
 | Orange                  | $2.10          | - heilt Scorbut         |
 |                         |                | - ist lecker            |
 +-------------------------+----------------+-------------------------+
+
+ : Eine Tabelle mit Blockelementen (hier eine Aufzählung)
+
+| Rechts | Links | Standard | Zentriert | 
+|-------:|:------|----------|:---------:| 
+|    12  | 12    | 12       |     12    | 
+|   123  | 123   | 123      |    123    |
+|     1  | 1     | 1        |     1     |
+
+  : Noch ein Tabellenformat
 
 Dieser Text wurde _mit dem Unterstrich hervorgehoben_
 und dieser *mit dem Sternchen*.
