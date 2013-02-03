@@ -1,4 +1,4 @@
-# Makefile for pandoc 1.9
+# Makefile for pandoc 1.10
 # --no-tex-ligatures ab pandoc 1.9.3
 PANDOC=~/.cabal/bin/pandoc
 DOC=md-test
@@ -10,6 +10,8 @@ all: html txt pdf epub odt docx
 html:	$(DOC).html
 
 txt:	$(DOC).txt
+
+tex:	$(DOC).tex
 
 pdf:	$(DOC).pdf
 
@@ -29,9 +31,11 @@ $(DOC).html: 	$(QUELLEN)
 $(DOC).txt:	$(QUELLEN)
 	$(PANDOC) -f markdown -t plain -s $(DOC).md --bibliography $(DOC).bib -o $(DOC).txt
 
-%.tex:	%.md %.bib default-de.latex
-	$(PANDOC) -f markdown $*.md -t latex -V documentclass=article --no-tex-ligatures -S --template=./default-de.latex --bibliography $*.bib --biblatex -o $*.tex
-#	Standard template aus pandoc 1.9
+$(DOC).tex:	$(DOC).md $(DOC).bib default-de-1.10.latex
+	$(PANDOC) -f markdown $*.md -t latex -V documentclass=article --no-tex-ligatures -S --template=./default-de-1.10.latex --bibliography $*.bib --biblatex -o $*.tex
+#	Für Pandoc 1.9 anderes Template verwenden
+	$(PANDOC) -f markdown $*.md -t latex -V documentclass=article --no-tex-ligatures -S --template=./default-de-1.10.latex --bibliography $*.bib --biblatex -o $*.tex
+#	Standard pandoc template
 #	$(PANDOC) -f markdown $*.md -t latex -V documentclass=article -V lang=ngerman --no-tex-ligatures -S -s --bibliography $*.bib --biblatex -o $*.tex
 
 $(DOC).pdf:	$(DOC).tex
