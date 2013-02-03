@@ -6,6 +6,8 @@
 *.out
 *.synctex.gz
 *.fdb_latexmk
+*.fls
+*.bcf
 *.run.xml
 *.html
 *.txt
@@ -15,3 +17,5 @@ md-test.odt
 md-test-blx.bib
 md-test.tex
 Ziele/*pdf
+*.swp
+Ziele*.zip
