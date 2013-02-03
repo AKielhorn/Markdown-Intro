@@ -832,6 +832,14 @@ erhält man die Abschnittsnummern und mit:
 
 das Inhaltsverzeichnis. Beides kann man natürlich auch kombinieren.
 
+Die Tiefe des Inhaltsverzeichnisses kann man ab Version 1.10 beeinflussen:
+
+     pandoc -f markdown -t latex --toc-depth=3 -o quelle.tex quelle.md
+
+Die Option `--toc` wird dabei implizit gesetzt, muss also nicht
+angegeben werden. Das funktioniert auch bei HTML und epub.
+
+
 … oder ganze Bücher
 ===================
 

@@ -1,0 +1,1211 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+\documentclass[11pt,ngerman,a4paper]{article}
+\usepackage[T1]{fontenc}
+
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+% use microtype if available
+\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+\ifxetex
+  \usepackage{fontspec,xltxtra,xunicode}
+  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
+  \usepackage{polyglossia} % -ak-
+  \setmainlanguage{german} % -ak-
+\else
+  \ifluatex
+    \usepackage{fontspec}
+    \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+    \usepackage[ngerman]{babel} % -ak-
+    \newcommand{\euro}{€}
+  \else
+    \usepackage[utf8]{inputenc}
+    \usepackage[TS1,T1]{fontenc} % -ak- T1 für \textdblquotedown
+%   \usepackage{lmodern} % -ak-
+    \usepackage[ngerman]{babel} % -ak-
+    \usepackage{eurosym}
+  \fi
+\fi
+\usepackage[margin=1in]{geometry}
+\usepackage{biblatex}
+\bibliography{Ziele-md}
+\usepackage{xcolor}
+\usepackage{listings}
+\lstdefinestyle{DTKlstBase}{%
+     basicstyle=\small\ttfamily,
+     basewidth=0.55em,
+     keepspaces,
+     identifierstyle=\color{black},
+     keywordstyle=\color{black},
+     stringstyle=\itshape\color{black},
+     commentstyle=\itshape\color{black},
+     columns=fullflexible,
+     tabsize=2,
+     frame=single,
+     extendedchars=true,
+     showspaces=false,
+     showstringspaces=false,
+     breaklines=true,
+     breakindent=0.5em,
+     backgroundcolor=\color{black!5},
+     breakautoindent=true,
+     captionpos=t,
+     aboveskip=\medskipamount,
+     belowskip=\medskipamount,
+     xrightmargin=\fboxsep,
+     emphstyle=\DTK@lst@colorbox{lightgray},
+     prebreak=,
+     postbreak=\mbox{\ensuremath{\hookrightarrow}},
+     literate={ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+       {Ä}{{\"A}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1 {ß}{\ss}1
+}
+
+\lstdefinestyle{DTKlstNoNumber}{%
+     style=DTKlstBase,
+     numbers=none,
+     xleftmargin=\fboxsep,
+}
+
+\let\verbatim=\relax
+\lstnewenvironment{verbatim}
+{\lstset{language={},style=DTKlstNoNumber}}
+{}
+
+\ifxetex
+  \usepackage[setpagesize=false, % page size defined by xetex
+              unicode=false, % unicode breaks when used with xetex
+              xetex]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
+\hypersetup{breaklinks=true,
+            bookmarks=true,
+            pdfauthor={Axel Kielhorn},
+            pdftitle={Viele Ziele Veröffentlichung},
+            colorlinks=true,
+            urlcolor=blue,
+            linkcolor=magenta,
+            pdfborder={0 0 0}}
+\urlstyle{same}  % don't use monospace font for urls
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{1em}  % prevent overfull lines
+\setcounter{secnumdepth}{0}
+
+\title{Viele Ziele Veröffentlichung}
+\author{Axel Kielhorn}
+\date{2013-02-03}
+\usepackage{csquotes}
+
+\begin{document}
+\maketitle
+
+\section{Anmerkung}
+
+Dieser Artikel wurde ursprünglich für die dante Vereinszeitschrift
+\enquote{Die TeXnische Komödie} 3/2011 in LaTeX geschrieben. Eine
+englische Übersetzung erschien im \enquote{TUGboat} Volume 32 (2011),
+No. 3.
+
+Mit dem Erscheinen von pandoc 1.9 wurde er nach \texttt{markdown}
+konvertiert. Durch eine angepasste \texttt{template} Datei wird das
+Aussehen des Originalartikels nachgebildet.
+
+\section{Ein Weg führt zu einem Ziel}
+
+Bisher war das Ziel meiner Veröffentlichungen immer Papier: DIN~A4,
+DIN~A5 oder auch mal 9~cm $\times$ 12~cm. Auf dem Weg dahin entstand
+immer eine PDF-Datei, daher lag es nahe, diese am Bildschirm zu lesen,
+was zumindest bei DIN~A5 bequem möglich ist.
+
+Doch dann kamen die Mobilgeräte. Einige davon können auch PDF anzeigen
+und mit etwas Aufwand kann man den Text so formatieren, das er auf
+\emph{einem} Mobilgerät mit wenig scrollen lesbar ist.
+
+Günstiger wäre natürlich ein Format, bei dem der Leser die Textgröße
+bestimmen kann und das Gerät den Text passend zur Anzeigengröße
+umbricht. Ein solches Format ist z. B. ePUB. Im Prinzip ist das nichts
+anderes als ein ZIP-Archiv mit einer definierten Struktur und ein paar
+XML-Dateien, die den eigentlichen Text enthalten. Das Aussehen kann
+durch eine css-Datei gesteuert werden.
+
+\section{Eine Umleitung}
+
+Zum Glück gibt es ein Programm, das LaTeX~lesen und ePUB schreiben kann:
+pandoc\autocite{pandoc}\footnote{pandoc ist unter GPL lizensiert.}. Wenn
+die LaTeX-Datei nicht zu kompliziert ist, kann pandoc sie verstehen und
+konvertieren. Aber was ist zu kompliziert? Am einfachsten konvertiert
+man ein Dokument von LaTeX~nach LaTeX~und sieht was übrig bleibt.
+
+\begin{verbatim}
+pandoc -f latex -t latex --template=./default-de.latex 
+-o quelle-pd.tex quelle.tex
+\end{verbatim}
+
+Dieser Befehl benutzt eine an die deutsche Sprache angepasste Version
+der Standardvorlage \texttt{default.latex} um eine neue LaTeX-Datei zu
+erstellen.\footnote{Das Begleitmaterial zu diesem Artikel befindet sich
+  auf
+  \url{https://github.com/AKielhorn/Markdown-Intro/blob/master/Ziele.zip}}
+
+\subsection{Die Steine auf dem Weg}
+
+Pandoc arbeitet mit UTF-8 Dateien. Latin-1 Texte lassen sich leicht
+konvertieren, Umlaute gemäß \texttt{german.sty} gehen jedoch verloren.
+Auch TeX-Akzente \texttt{\textbackslash{}\^{}o} oder
+Einbuchstabenbefehle \texttt{\textbackslash{}o} führen manchmal zu
+Problemen. Das lässt sich aber mit ein paar Zeilen \texttt{sed} beheben
+(siehe Abschnitt Reisevorbereitung).
+
+Einfache Auszeichnungsbefehle für \textbf{fett} und \emph{kursiv} werden
+unterstützt, doch schon beim geschachteltem
+\texttt{\textbackslash{}emph} ist Schluss.
+
+\section{Ein neuer Anfang}
+
+Steht die LaTeX-Datei wirklich am Anfang? Oder sollten wir nicht lieber
+LaTeX~als \emph{ein} Backend verstehen und die LaTeX-Datei somit nur als
+ein Zwischenprodukt?
+
+\section{Eine ungewöhnliche Richtung: Markdown statt markup}
+
+Markdown ist eine von John Gruber\autocite{gruber} entwickelte
+Auszeichnungssprache, die so aussieht, als ob sie keine Auszeichnungen
+enthält:
+
+\begin{quote}
+A Markdown-formatted document should be publishable as-is, as plain
+text, without looking like it's been marked up with tags or formatting
+instructions.
+\end{quote}
+
+Der Anfang dieses Artikels sieht in Markdown so aus:
+
+\begin{verbatim}
+# Ein Weg führt zu einem Ziel
+
+Bisher war das Ziel meiner Veröffentlichungen immer Papier: DIN
+A4, DIN A5 oder auch mal 9 cm $\times$ 12 cm. Auf dem Weg dahin
+entstand immer eine PDF-Datei, daher lag es nahe, diese am
+Bildschirm zu lesen, was zumindest bei DIN A5 bequem möglich
+ist.
+
+Doch dann kamen die Mobilgeräte. Einige davon können auch PDF
+anzeigen und mit etwas Aufwand kann man den Text so formatieren,
+das er auf *einem* Mobilgerät mit wenig scrollen lesbar ist.
+\end{verbatim}
+
+Dieser Text wurde mit dem Befehl
+
+\begin{verbatim}
+pandoc -f latex -t markdown -o Ziele.md Ziele.tex
+\end{verbatim}
+
+direkt aus der LaTeX-Datei erzeugt.
+
+Markdown ist eine sehr eingeschränkte Sprache, die Manpage, die den
+Sprachumfang beschreibt ist nur 16 Seiten lang. Im Vergleich dazu ist
+l2kurz dreimal so lang und kratzt gerade mal an der Oberfläche von
+LaTeX.
+
+Bei der Konvertierung von LaTeX~zu Markdown sollte man beachten, das
+pandoc kein TeX~versteht. Es nutzt Reguläre Ausdrücke um LaTeX~zu
+interpretieren. Das hat zur Folge, das bei einigen Befehlen zusätzliche
+Leerzeilen erforderlich sind, damit pandoc die Befehle von normalem Text
+unterscheiden kann.
+
+\section{Auf neuem Weg zum alten Ziel: PDF aus Markdown über LaTeX}
+
+\begin{verbatim}
+pandoc -f markdown -t latex --template=./default-de.latex 
+    -o quelle.tex quelle.md
+\end{verbatim}
+
+\subsection{Die \texttt{default-de.latex} Dateien}
+
+Die mitgelieferte \texttt{default.latex} Datei ist eine Minimalversion.
+Für deutsche Texte empfiehlt sich die erweiterte
+\texttt{defaut-de.latex} Datei, die im
+Begleitmaterial~\autocite{Ziele-git} zu finden ist. Die Änderungen zur
+Originalversion sind durch ein \texttt{-ak-} gekennzeichnet.
+
+Seit Version 1.9 liefert Pandoc eine universelle Template-Datei mit.
+Diese kann durch zuweisen einer Variablem auf die gewünschte Sprache
+eingestellt werden. Das Argument ist hier eine von \texttt{babel}
+unterstützte Sprache.
+
+\begin{verbatim}
+pandoc -f markdown -t latex -V lang=ngerman -s 
+    -o quelle.tex quelle.md
+\end{verbatim}
+
+In diesem Fall muss pandoc mit der Option \texttt{-s} (standalone)
+mitgeteilt werden, das ein vollständiges Dokument erstellt werden soll.
+
+Leider fehlt in der offiziellen \texttt{default.latex} Datei die Zeile
+
+\begin{verbatim}
+\usepackage[T1]{fontenc}
+\end{verbatim}
+
+daher ist \texttt{default-de.latex} immer noch erforderlich.
+
+Die \texttt{T1} Zeichensatzkodierung ist notwendig, da \texttt{OT1} die
+Anführungszeichen unten nicht enthält. Französische Anführungszeichen,
+«Das sind diese» funktionieren zwar ohne \texttt{fontenc}, das Ergebnis
+sieht aber furchtbar aus.
+
+Mit Version 1.9.4 wurde die template Datei erweitert und enthält nun die
+Zeilen
+
+\begin{verbatim}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\end{verbatim}
+
+Damit ist die Datei \texttt{default-de.latex} nicht mehr erforderlich,
+alle Einstellungen können über Variablen vorgenommen werden.
+
+Anführungszeichen führen noch zu einem weiteren Problem. Als TeX noch
+auf eine 7-Bit Eingabekodierung beschränkt war, wurden einige Zeichen
+über Ligaturen eingegeben. Dazu zählten auch die englischen
+Anführungszeichen \texttt{``} und \texttt{''}. Aus
+Kompatibilitätsgründen gibt Pandoc die Anführungszeichen immer noch so
+aus. In deutschen Texten werden die \texttt{``} Zeichen als
+\emph{schließende} Anführungszeichen verwendet. Endet nun ein Zitat mit
+einem \texttt{!} oder einem \texttt{?}, so greift ein anderer
+Ligaturmechanismus, der die Kombination \texttt{! `} in ein \texttt{¡}
+und \texttt{? `} in ein \texttt{¿} umwandelt. Dies lässt sich umgehen,
+indem man bei der Eingabe \texttt{"} benutzt. Wenn im LaTeX template das
+Paket \texttt{csquotes} benutzt wird, werden die geraden
+Anführungsstriche in \texttt{\textbackslash{}enquote} Befehle
+übsersetzt. In Verbindung mit der Option \texttt{german} werden daraus
+dann die richtigen Anführungsstriche. Bei anderen Formaten muss man
+damit leben, das hier englische Anführungsstriche verwendet werden.
+
+Alternativ kann man natürlich die LaTeX Datei mit \texttt{sed}
+bearbeiten und die Zeichen nach Unicode konvertieren.
+
+Bei der Verwendung von französischen Anführungszeichen gibt es keine
+Probleme.
+
+Seit pandoc 1.9.3 gibt es einen neuen Schalter
+\texttt{-{}-no-tex-ligatures} mit dem die Übersetzung von
+Unicode-Zeichen in TeX-Ligaturen abgeschaltet werden kann. \texttt{„}
+und \texttt{``} werden dann unverändert in den TeX Text übernommen.
+Gleichzeitig wird die Übersetzung von \texttt{-{}-} in \texttt{--} und
+\texttt{-{}-{}-} in \texttt{---} abgeschaltet. Diese Zeichen müssen dann
+durch TeX konvertiert werden. Bei \texttt{pdflatex} ist das
+standardmäßig der Fall, bei \texttt{XeTeX} und \texttt{LuaTeX} muss die
+\texttt{fontspec} Option \texttt{Ligatures=TeX} gesetzt werden.
+
+Dieser Schalter schaltet auch die Option \texttt{-{}-smart} ab.
+Schreibmaschinenanführungszeichen \texttt{"} werden dann nicht mehr in
+typographische Anführungszeichen konvertiert. Möchte man diese Funktion
+erhalten, so ist die Option \texttt{-{}-smart} (Kurzform \texttt{-S})
+zusätzlich anzugeben.
+
+\subsection{Abkürzung}
+
+Der schnellste Weg aus einer Markdown-Datei ein PDF zu erstellen ist:
+
+\begin{verbatim}
+pandoc --template=./default-de.latex -o quelle.pdf quelle.md
+\end{verbatim}
+
+Am Zielformat \texttt{pdf} erkennt pandoc, das es die PDF-Datei direkt
+erzeugen soll. Im Hintergrund wird natürlich LaTeX aufgerufen, es
+bleiben jedoch keine temporären Dateien zurück. Wird eine
+Inhaltsverzeichnis gewünscht, ist ein zweiter LaTeX-Lauf erforderlich.
+Pandoc erkennt das am Befehl \texttt{\textbackslash{}tableofcontents}.
+
+Mit den Schaltern \texttt{-{}-xetex} bzw. \texttt{-{}-luatex} kann man
+von pdfTeX~ auf XeLaTeX oder LuaLaTeX umschalten. Im
+\texttt{default.latex} wird mit Hilfe von \texttt{ifxetex} und
+\texttt{ifluatex} ermittelt, welches TeX verwendet wird.
+
+Auf diesem Weg kann man natürlich kein BibTeX/Biber verwenden. Zum
+Erstellen des Literaturverzeichnisses muss man auf die pandoc internen
+Funktionen zurückgreifen.
+
+Bei älteren pandoc Versionen übernimmt das mitgelieferte Programm
+\texttt{markdown2pdf} die Konvertierung nach PDF.
+
+\begin{verbatim}
+markdown2pdf --template=./default-de.latex quelle.md
+\end{verbatim}
+
+\subsection{Nacharbeit}
+
+Die automatisch erstellte LaTeX-Datei ist fast so gut wie eine von einem
+Anfänger manuell erstellte. Natürlich wird man auch hier mit Trennhilfen
+und ähnlichem die overfull und underfull hboxes beseitigen müssen.
+
+\section{Der Weg zu einem neuen Ziel: ePUB}
+
+Der ursprüngliche Wunsch war es, eine ePUB Datei zu erstellen. Dies
+geschieht mit dem Befehl:
+
+\begin{verbatim}
+pandoc -f markdown -t epub --epub-cover-image=cover-image.gif -s
+    -o Ziele.epub Ziele.md
+\end{verbatim}
+
+Der Text wird anhand der Gliederungsbefehle in verschiedene Dateien
+aufgeteilt, das erleichtert die Nachbehandlung, z. B. mit
+Sigil~\autocite{sigil}.
+
+Seit Version 1.8.1.2 kann ein Titelbild mit der Option
+\texttt{-{}-epub-cover-image} eingebunden werden.
+
+Damit ein eBook-Reader den Text richtig umbrechen und bei Bedarf trennen
+kann, ist es erforderlich ihm die Dokumentsprache mitzuteilen. Pandoc
+wertet die Umgebungsvariable \texttt{\$LANG} aus und setzt die Sprache
+entsprechend. Auf einem deutschen Rechner hat diese Variable
+normalerweise den Wert \texttt{de\_DE}, in Österreich den Wert
+\texttt{de\_AT}.
+
+Möchte man einen Text in einer anderen Sprache schreiben, so kann man
+diesen Wert durch zuweisen einer Variablen ändern.
+
+\begin{verbatim}
+pandoc -f markdown -t epub  -s -V lang=en_US
+    -o Ziele.epub Ziele.md
+\end{verbatim}
+
+führt zu einem Text in amerikanischem English.
+
+Auf einigen ebook Readern kann es zu Darstellungsproblemen kommen, da
+die installierten Zeichensätze nur einen kleinen Teil des Unicode
+Zeichenvorrats enthalten. Feste Abstände, wie sie z. B. im
+Mathematiksatz verwendet werden, erscheine dann als Fragezeichen. Oft
+fehlt auch der Pfeil mit Haken, der als Zurück-Symbol in Fußnoten
+verwendet wird.
+
+Bei den meisten Geräten lassen sich eigene Zeichensätze installieren.
+Gute Erfahrungen habe ich mit GNU Freefont
+(\url{http://savannah.gnu.org/projects/freefont/}) und DejaVu
+(\url{http://dejavu-fonts.org/wiki/index.php}) gemacht.
+
+\subsection{Ein Lagerfeuer}
+
+Es gibt zwei Wege, um aus ePUB Dateien Dokumente für den
+Kindle\footnote{Kindle ist wahrscheinlich ein eingetragenes Warenzeichen
+  von Amazon, auch wenn ich auf den ersten Blick keinen entsprechenden
+  Hinweis auf der Webseite gefunden habe.} zu erstellen:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Der offizielle Amazon Weg führt über das Programm \texttt{kindlegen},
+  das von der Amazon Webseite heruntergeladen werden kann. Ab pandoc
+  Version 1.9 kann \texttt{kindlegen} die von pandoc erzeugten Dateien
+  direkt in das \texttt{mobi}-Format übersetzen.
+
+  \texttt{Kindlegen} mag es nicht, wenn als Sprache \texttt{de\_DE}
+  angegeben ist. Soll ein ePUB später mit \texttt{kindlegen}
+  weiterverarbeitet werden, so ist als Sprache \texttt{de} für deutsch,
+  ohne die Landesangabe \texttt{DE} oder \texttt{AT} zu wählen.
+  Schweitzer Deutsch \texttt{de\_CH} ist jedoch in Ordnung, es wird
+  wahrscheinlich wegen des fehlenden \texttt{ß} anders behandelt. Beim
+  Aufruf von pandoc ist die Option
+
+\begin{verbatim}
+-V lang=de
+\end{verbatim}
+
+  anzugeben.
+
+  Ältere pandoc Versionen erzeugen ein ePUB, bei dem \texttt{kindlegen}
+  Probleme hat, wenn im Titel oder den Kapitelüberschriften Umlaute
+  vorkommen. Man kann das Problem umgehen, indem man das Dokument in
+  \texttt{sigil} öffnet und gleich wieder speichert. Alternativ kann man
+  es auch mit den Komandozeilenwerkzeugen aus
+  \texttt{calibre}~\autocite{calibre} von ePUB nach ePUB konvertieren.
+  Danach verarbeitet \texttt{kindlegen} die Datei ohne Probleme.
+
+\begin{verbatim}
+ebook-convert quelle.epub quelle_fixed.epub 
+    -no-default-epub-cover
+\end{verbatim}
+
+  Mit dem Erscheinen des Kindle fire hat Amazon ein neues Dateiformat
+  \texttt{KF8} eingeführt. Zur Konvertierung in dieses Format ist
+  \texttt{kindlegen} Version 2.0 erforderlich.
+\item
+  Eine Open Source Alternative ist das Programm
+  \texttt{calibre}~\autocite{calibre}. Im Menüpunkt
+  \texttt{Einstel"-lungen} kann man unter
+  \texttt{Erweitert-\textgreater{} Verschiedenes-\textgreater{} Komandozeilen-Tools installieren}
+  Kommandozeilenwerkzeuge installieren. Diese stehen dann z. B. für ein
+  Makefile zur Verfügung. Beim Ausgabeformat \texttt{mobi} für den
+  Kindle lautet die Kommandozeile:
+
+\begin{verbatim}
+ebook-convert quelle.epub quelle.mobi --output-profile=kindle 
+\end{verbatim}
+
+  Die erstellte Datei ist größer als bei \texttt{kindlegen}, da der Text
+  weniger gut komprimiert wird.
+
+  Mehr Informationen zu dem Befehl erhält man mit:
+
+\begin{verbatim}
+ebook-convert quelle.epub quelle.mobi -h 
+\end{verbatim}
+\end{enumerate}
+
+\section{Sehen wo ich gehe: WYSIWYG}
+
+\enquote{Kann ich das als Word-Datei haben?} Wer kennt diese Frage
+nicht? Mit pandoc 1.9 ist es möglich eine \texttt{docx} Datei zu
+erstellen:
+
+\begin{verbatim}
+pandoc -f markdown -t docx --reference-docx=./reference-de.docx -s 
+    -o quelle.odt quelle.md
+\end{verbatim}
+
+Die Sprache der Datei ist englisch und muss nach jeder Konvertierung in
+Formatvorlage \texttt{Standard} auf deutsch zurückgesetzt werden.
+
+Wer lieber mit StarOffice / OpenOffice / LibreOffice arbeitet, kann mit
+
+\begin{verbatim}
+pandoc -f markdown -t odt --reference-odt=./reference-de.odt -s 
+    -o quelle.odt quelle.md
+\end{verbatim}
+
+eine passende Datei erstellen.
+
+Die Dateien \texttt{reference-de.docx} bzw. \texttt{reference-de.odt}
+dienen hier als Basis für die Absatzvorlagen und das Dokumentlayout.
+Dies können eine beliebige Dateien sein, am einfachsten ist es jedoch
+eine von pandoc erstellte Datei an die eigenen Layoutwünsche anzupassen.
+So ist sichergestellt, das die internen Bezeichnungen der Absatzformate
+mit den von pandoc vergebenen übereinstimmen.
+
+Die Datei \texttt{reference-de.odt} basiert auf einer von pandoc
+erstellten Datei, bei der die Sprache auf deutsch umgestellt wurde. Bis
+pandoc 1.8.1.2 gab es ein Problem beim Einbinden von Bildern. OpenOffice
+meldet eine korrupte Datei und bietet an, diese zu reparieren. Dieser
+Fehler wurde in Version 1.8.1.3 behoben.
+
+Eingebundene Bilder werden auf Einheitsgröße zusammengestaucht und
+müssen jeweils einzeln auf Originalgröße expandiert werden. Dieser
+Fehler wurde mit pandoc 1.9 behoben.
+
+\section{Reisevorbereitung}
+
+Mit einem kleinen \texttt{sed}-Skript lässt sich diese
+\texttt{dtk}-basierte LaTeX-Quelle in eine neutrale LaTeX-Datei
+umwandeln, die von pandoc weitgehend verlustlos gelesen werden kann.
+Lediglich die \texttt{bibliography}-Umgebung geht verloren.
+
+\begin{verbatim}
+s/\\LaTeX/LaTeX/g
+s/\\TeX/TeX/g
+s/\\ConTeXt/ConTeXt/g
+s/\\Program{\([a-zA-Z]*\)}/\1/g
+s/\\Acronym{\([a-zA-Z]*\)}/\1/g
+s/\\Package/\\texttt/g
+s/\[style=DTKlstNoNumber\]//
+s/\\File/\\texttt/g
+s/\\Macro{/\\texttt{\\textbackslash /g
+s/\\begingroup//
+s/\\endgroup//
+\end{verbatim}
+
+Mit dem Aufruf
+
+\begin{verbatim}
+sed -f dtk2mdtex.sed Ziele.tex >Ziele-clean.tex
+\end{verbatim}
+
+werden die LaTeX-Befehle, die pandoc nicht kennt, aus der Quelldatei
+entfernt. Das Ergebnis kann dann mit
+
+\begin{verbatim}
+pandoc -f latex -t markdown -s -o Ziele-clean.md  Ziele-clean.tex
+\end{verbatim}
+
+nach Markdown konvertiert werden.
+
+\section{Wegbeschreibung}
+
+\subsection{Gliederungsbefehle}
+
+Markdown unterstützt bis zu 6 Gliederungsebenen. Die Gliederungsstufe
+wird durch die Anzahl der \texttt{\#} Zeichen vorgegeben. Vor jeder
+Überschrift ist eine Leerzeile erforderlich.
+
+\begin{verbatim}
+# Oberste Ebene
+
+## Zweite Ebene
+
+### Dritte Ebene
+
+#### *Wichtige Information* in der vierten Ebene versteckt
+\end{verbatim}
+
+Eine alternative Form der Gliederungsbefehle unterstützt nur zwei
+Ebenen:
+
+\begin{verbatim}
+Erste Ebene
+===========
+
+Zweite und letzte Ebene
+-----------------------
+\end{verbatim}
+
+Weiter Ebenen müssen dann durch \texttt{\#} Zeichen angegeben werden.
+Standardmäßig erzeugt pandoc beim konvertieren nach Markdown dieses
+Format. Mit der Option \texttt{-{}-atx-headers} werden Überschriften im
+ersten Format erstellt.
+
+\subsection{Zitatumgebung}
+
+Zitiert wird wie in (alten) E-Mail Programmen mit einem
+\texttt{\textgreater{}}
+
+\begin{verbatim}
+> Hier zitiere ich eine alte E-Mail
+>
+> > Und hier wird in der alten E-Mail eine noch ältere zitiert.
+>
+> Normalerweise erhält jede Zeile ein >-Zeichen. Einige Editoren
+> fügen dann in der Folgezeile das > gleich mit ein.
+>
+> Sollte ein Editor nicht über diese Funktion verfügen,
+reicht es, nur die erste Zeile eines Absatzes zu markieren.
+\end{verbatim}
+
+Eine besondere Form von Zitaten sind Zitate aus Programmen. Diese werden
+standardmäßig in einer nichtproportionalen Schrift gesetzt.
+Programmzitate werden durch 4 Leerzeichen oder einen Tabulatorschritt
+eingegeben:
+
+\begin{verbatim}
+    \documentclass[11,ngerman]{dtk}
+    \usepackage[utf8]{inputenc}
+\end{verbatim}
+
+Auch vor Zitaten ist eine Leerzeile erforderlich.
+
+Will man bei längeren Listings nicht jede Zeile einrücken, so gibt es in
+pandoc eine alternative Form, diese ist jedoch nicht Standard-Markdown.
+Durch eine Zeile mit mindestens 3 \texttt{\textasciitilde{}}-Zeichen
+wird das Programmlisting eingeleitet und durch eine Zeile mit mindestens
+genauso vielen \texttt{\textasciitilde{}}-Zeichen wieder beendet. Eine
+Zeile mit weniger \texttt{\textasciitilde{}}-Zeichen ist Bestandteil des
+Listings.
+
+\begin{verbatim}
+~~~~~~~~
+Dies ist ein Programm Listing
+~~~~
+Header
+~~~~
+Body
+~~~~~~~~
+\end{verbatim}
+
+Pandoc 1.9 wird standardmäßig mit Unterstützung für Syntaxhervorhebung
+übersetzt. Bei älteren Version musste man das explizit aktivieren. Eine
+Liste der unterstützten Sprachen erhält man mit:
+
+\begin{verbatim}
+pandoc -v
+\end{verbatim}
+
+Die Sprache teilt man dem Listing mit:
+
+\begin{verbatim}
+~~~~~~~~{.Latex}
+\documentclass[11,ngerman]{dtk}
+\usepackage[utf8]{inputenc}
+~~~~~~~~
+\end{verbatim}
+
+Mit dem Schalter \texttt{-{}-no-highlight} kann man die Hervorhebung
+abschalten.
+
+\subsection{Listen}
+
+Aus LaTeX~kennen wir verschiedene Listenformen:
+
+\subsubsection{Die \texttt{itemize} Liste}
+
+Eine Liste wird durch ein Aufzählungszeichen (\texttt{*}, \texttt{+}
+oder \texttt{-}) eingeleitet.
+
+\begin{verbatim}
+* eins
+* zwei
+* drei
+    - drei a
+    - drei b
+* vier
+  Wie immer verstecken wir die wichtigen Informationen ganz unten,
+  in der Hoffnung, das niemand sie liest.
+\end{verbatim}
+
+Besteht ein Listeneintrag aus mehreren Absätzen, so sind die
+Folgeabsätze mit 4 Leerzeichen oder einem Tabulatorschritt einzurücken.
+
+\begin{verbatim}
+* eins
+* zwei
+* drei
+    - drei a
+    - drei b
+* vier
+
+Wie immer verstecken wir die wichtigen Informationen ganz
+unten, in der Hoffnung, das niemand sie liest.
+    
+Um ganz sicher zu gehen, erwähnen wir erst im letzten Absatz
+die vier Leerzeichen Regel.
+\end{verbatim}
+
+\subsubsection{Die \texttt{enumerate} Liste}
+
+Das erste Aufzählungszeichen gibt hier das Format der Aufzählungszeichen
+vor (\texttt{1.}, \texttt{(1)} oder \texttt{i.}). Es ist nicht
+notwendig, das die weiteren Aufzählungszeichen in der richtigen
+Reihenfolge erscheinen (auch wenn das seltsam aussieht).
+
+Es wird automatisch das \texttt{enumerate}-Paket geladen. Möchte man das
+verhindern, so kann man stattdessen die Aufzählungspunkte mit
+\texttt{\#.} markieren, dann wird die Standardeinstellung der
+verwendeten Dokumentklasse benutzt.
+
+Ab Version 1.10 wird das \texttt{enumerate}-Paket nicht mehr benötigt,
+die Anpassungen erfolgen direkt im TeX-Code.
+
+\begin{verbatim}
+1. ein
+2. zwei
+4. drei
+    a) drei a
+    b) drei b
+5. vier
+  Wie immer verstecken wir die wichtigen Informationen ganz unten,
+  in der Hoffnung, das niemand sie liest.
+\end{verbatim}
+
+Pandoc kann auch Listen mit römischen Zahlen nummerieren, dabei gibt es
+jedoch einen Stolperstein: Damit nicht abgekürzte Vornamen die zufällig
+am Anfang einer Zeile stehen als Aufzählzeichen für eine Liste erkannt
+werden, ist bei den Zahlen I, V, X, C, D und M ein doppeltes Leerzeichen
+erforderlich. Bei Kleinbuchstaben ist das nicht notwendig.
+
+\begin{verbatim}
+1. ein
+2. zwei
+4. drei
+    I.  drei a (mit doppeltem Leerzeichen)
+    II.  drei b
+5. vier
+    i. vier a (ohne doppeltes Leerzeichen)
+    ii. vier b
+\end{verbatim}
+
+\subsubsection{Die \texttt{description} Liste}
+
+Endlich kommen wir zu den beliebten \texttt{l2kurz}-Tieren. Das
+beschriebene Objekt steht allein in einer Zeile, die Beschreibung wird
+durch einen Doppelpunkt oder eine Tilde eingeleitet.
+
+Wenn \emph{hinter} der Beschreibung eine Leerzeile steht, wird sie als
+Absatz formatiert, also gegebenenfalls mit Einzug und größerem
+Zeilenabstand. Um eine kompakte Liste zu erreichen, muss man auf Absätze
+verzichten, bzw. diese müssen als mehrere Beschreibungen definieren
+werden. Wichtig ist hierbei auch der Abstand hinter der letzten
+Beschreibung, sonst wird u.U. der letzte Punkt der Liste anders
+formatiert als die übrigen Punkte.
+
+Beim OpenDocument- oder LaTeX-Export werden beide Fälle gleich
+behandelt.
+
+\begin{verbatim}
+Gelse
+  : ein kleines Tier, das östlich des Semmering Touristen verjagt.
+Gemse
+  : ein großes Tier, das westlich des Semmering von Touristen 
+    verjagt wird.
+  : Langer Absatz über die Frage ob es Gemsen oder Gämsen heißt.
+Gürteltier
+  ~ ein mittelgroßes Tier, das hier nur wegen der Länge seines 
+    Namens vorkommt.
+  ~ Gürteltiere sind in Österreich außerhalb von Zoologischen 
+    Gärten selten anzutreffen.
+Nächster Absatz
+\end{verbatim}
+
+Die l2kurz Tiere, hier mit etwas mehr Platz:
+
+\begin{verbatim}
+Gelse
+  : ein kleines Tier, das östlich des Semmering Touristen verjagt.
+
+Gemse
+  : ein großes Tier, das westlich des Semmering von Touristen 
+    verjagt wird.
+  : Langer Absatz über die Frage ob es Gemsen oder Gämsen heißt.
+
+Gürteltier
+  ~ ein mittelgroßes Tier, das hier nur wegen der Länge seines 
+    Namens vorkommt.
+  ~ Gürteltiere sind in Österreich außerhalb von Zoologischen 
+    Gärten selten anzutreffen.
+
+Nächster Absatz
+\end{verbatim}
+
+\subsubsection{Die fortlaufende Liste}
+
+Normalerweise fängt jede neue Liste wieder bei 1 an. Es gibt jedoch eine
+besondere Form, die fortlaufend über das gesamte Dokument läuft,
+vergleichbar mit den caption-Zählern für \texttt{figure} oder
+\texttt{table} Umgebungen.
+
+Auf diese Zähler kann später Bezug genommen werden.
+
+\begin{verbatim}
+(@Behauptung) Hier behaupte ich etwas.
+
+Die Behauptung (@Behauptung) wird in (@Beweis) bewiesen.
+
+(@Beweis) Und hier der versprochene Beweis. 
+\end{verbatim}
+
+Diese Liste benutzt nicht den
+LaTeX~\texttt{\textbackslash{}label}/\texttt{\textbackslash{}ref}-Mechanismus
+und erfordert daher keinen zweiten LaTeX-Lauf.
+
+\subsection{Tabellen}
+
+Seit Version 1.8.1.2 werden Tabellen mit dem \texttt{ctable}-Paket
+gesetzt. Dadurch hat sich die Qualität der Ausgabe erheblich verbessert.
+
+Es gibt drei Arten von Tabellen. Bei der Eingabe von Tabellen sollte man
+auf Tabulatoren verzichten und die Spalten mit Leerzeichen ausrichten.
+
+\begin{verbatim}
+ Rechts   Links    Mitte   Standard
+-------   ------  -------  --------
+     12   12        12           12
+    123   123       123         123
+    ab    ab        ab          ab
+
+Table: Eine einfache Tabelle
+\end{verbatim}
+
+Der Tabellenkopf und die einzelnen Tabellenzeilen müssen in eine Zeile
+passen. Die Ausrichtung der Spalten hängt von der Unterstreichung der
+Kopfzeile ab.
+
+\begin{itemize}
+\item
+  Ist die Unterstreichung rechtsbündig und steht auf der linken Seite
+  hervor, ist die Ausrichtung rechtsbündig.
+\item
+  Ist die Unterstreichung linksbündig und steht auf der rechten Seite
+  hervor, ist die Ausrichtung linksbündig.
+\item
+  Steht die Unterstreichung auf beiden Seite hervor, ist die Ausrichtung
+  zentriert.
+\item
+  Ist die Unterstreichung genauso lang wie der Text, wird die
+  Standardeinstellung (linksbündig) benutzt.
+\end{itemize}
+
+Eine Tabelle muss mit einer Leerzeile abgeschlossen werden. Optional
+darf ein Tabellentitel vergeben werden, diese wird durch das
+Schlüsselwort \texttt{Table:} (oder nur \texttt{:}) eingeleitet. Wird
+ein Titel verwendet, so wird die Tabelle als Gleitobjekt in einer
+\texttt{table}-Umgebung formatiert, ansonsten als Tabelle im Fließtext.
+
+Mehrzeilige Tabellen müssen durch jeweils eine Reihe \texttt{-}-Zeichen
+eingeschlossen werden. Die Tabellenzeilen werden durch Leerzeilen
+getrennt.
+
+\begin{verbatim}
+------------------------------------------------------------------
+ Zentrierter    Standard    
+ Kopf           Kopf       Rechtsbündig  Linksbündig
+-------------   --------  -------------  ---------------------
+Erste           Zeile             12.0   Beispiel einer 
+                                         mehrzeiligen Zeile
+
+Zweite          Zeile              5.0   Noch ein mehrzeilige
+                                         Zeile, durch eine
+                                         Leerzeile abgetrennt
+-------------------------------------------------------------------
+\end{verbatim}
+
+Beim dritten Typ handelt es sich um sogenannte Rastertabellen. Der
+äußere Rahmen wird natürlich bei LaTeX-Ausgabe nicht gesetzt. In den
+Tabellenzellen können z. B. enthalten sein.
+
+\begin{verbatim}
++-----------------------+--------------+-------------------------+
+| Frucht                | Preis        | Vorteile                |
++=======================+==============+=========================+
+| Banane                | $1.34        | - eingebaute Verpackung |
+|                       |              | - leuchtende Farben     |
++-----------------------+--------------+-------------------------+
+| Orange                | $2.10        | - heilt Scorbut         |
+|                       |              | - ist lecker            |
++-----------------------+--------------+-------------------------+
+\end{verbatim}
+
+\subsection{Titelei}
+
+Angaben zu Titel des Dokuments, den Autoren und dem Datum der Erstellung
+werden am Anfang der Datei angegeben:
+
+\begin{verbatim}
+% Viele Ziele Veröffentlichung
+% Axel Kielhorn
+% DTK 2011-3
+\end{verbatim}
+
+Lange Titel und mehrere Autoren bricht man auf mehrere Zeilen um:
+
+\begin{verbatim}
+% Viele Ziele Veröffentlichung\
+  (Multi Target Publishing)
+% Axel Kielhorn
+  Babel Fisch (Übers.)
+% DTK 2011-3
+\end{verbatim}
+
+Der \texttt{\textbackslash{}} am Ende der ersten Zeile erzeugt ein
+\texttt{\textbackslash{}\textbackslash{}} in der LaTeX-Ausgabe. Leider
+führt das bei einigen eBook Lesegeräten zu Problemen, hier sollte man
+auf das \texttt{\textbackslash{}} verzichten.
+
+Das ePUB Format fordert ein echtes Datum (2012-02-12) als Argument.
+
+\begin{verbatim}
+% Viele Ziele Veröffentlichung
+% Axel Kielhorn
+% 2012-02-12
+\end{verbatim}
+
+\subsection{Fußnoten}
+
+Fußnoten bestehen aus zwei Teilen, der Fußnotenmarkierung und dem
+Fußnotentext.
+
+\begin{verbatim}
+Dies ist eine Fußnotenmarkierung[^1] und dies eine 
+weitere[^fussnote]
+
+[^1]: Hier ist der Fußnotentext
+
+[^fussnote]: Diese Fußnote ist etwas länger.
+
+    Sie enthält einen zweiten Absatz.
+\end{verbatim}
+
+\subsection{Hervorhebungen}
+
+Kursiver Text wird durch \emph{ein} \texttt{*} oder \texttt{\_}
+eingeschlossen.
+
+Fetter Text wird durch \emph{zwei} \texttt{*} oder \texttt{\_}
+eingeschlossen.
+
+Sollen nur Wortteile hervorgehoben werden, ist zwingend der \texttt{*}
+zu nutzen, da in Variablennamen häufig \texttt{\_} als Bestandteil des
+Namens vorkommen.
+
+\begin{verbatim}
+Dieser Text wurde _mit dem Unterstrich hervorgehoben_
+und dieser *mit dem Sternchen*.
+
+Für __fetten Text__ benutzt man **zwei** Zeichen.
+
+Variablen_namen_ können Unterstriche enthalten, daher benutzt man 
+zum hervor*heben* das Sternchen.
+\end{verbatim}
+
+Zum Hochstellen benutzt man das bekannte \texttt{\^{}}, zum Tiefstellen
+muss auf die \texttt{\textasciitilde{}} ausgewichen werden, da der
+Unterstrich ja schon zum auszeichnen verwendet wird. Die Befehle
+schließen das Argument ein.
+
+\begin{verbatim}
+H~2~O ist Wasser, 2^10^ ist 1024.
+2^2^^2^ ist 2^22^.
+\end{verbatim}
+
+Die letzte Zeile mag zuerst verwundern, allerdings handelt es sich hier
+nicht um Mathematiksatz sondern um Textexponenten und -indices.
+
+\subsection{Mathematik}
+
+Inline-Mathematik wird wie aus LaTeX~bekannt in \texttt{\$}
+einbeschlossen. Der Inhalt wird direkt an LaTeX~weitergeben, daher ist
+alles erlaubt, was in LaTeX~möglich ist.
+
+\begin{verbatim}
+$2^{2^2} != 2^{22}$
+\end{verbatim}
+
+Bei anderen Ausgabeformaten hängt es von jeweiligen Format und den
+Optionen beim Aufruf von pandoc ab, was als Ausgabe erzeugt wird.
+
+Abgesetzte Formeln können als rohes LaTeX~eingegeben werden.
+
+\subsection{Rohes LaTeX}
+
+Alles was zwischen einem
+\texttt{\textbackslash{}begin}/\texttt{\textbackslash{}end} Paar steht
+wird direkt an LaTeX~(oder ConTeXt) weitergegeben und in allen anderen
+Formaten ignoriert.
+
+\subsection{Rohes HTML}
+
+Da Markdown ursprünglich zum Erstellen von HTML-Seiten entwickelt wurde,
+bietet es die Möglichkeit HTML direkt einzugeben. Bei nicht HMTL
+basierten Ausgabeformaten wird es ignoriert.
+
+\subsection{Links}
+
+Bei einem Format, das ursprünglich zum Erstellen von Webseiten gedacht
+war, sollte man annehmen, das es mit Hyperlinks umgehen kann. Und so ist
+es natürlich auch. Alles, was in einer Zeile zwischen spitzen Klammern
+steht, ist ein Link.
+
+\begin{verbatim}
+<http://johnmacfarlane.net/pandoc/>
+\end{verbatim}
+
+Ein Link kann natürlich auch im Text auftauchen:
+
+\begin{verbatim}
+Die Dokumentation zu pandoc befindet sich auf der
+[pandoc Webseite](http://johnmacfarlane.net/pandoc/).
+\end{verbatim}
+
+\subsection{Bilder}
+
+Bilder sind eine besondere Form des Links. Wenn vor dem Link ein
+\texttt{!} steht, wird dieser als Link auf ein Bild interpretiert.
+
+\begin{verbatim}
+![Ein Blaues Bild](blau.jpg "Blaues Bild")
+\end{verbatim}
+
+Das Bild wird in einer \texttt{figure}-Umgebung gesetzt, der Text in den
+eckigen Klammern wird als Bildunterschrift verwendet.
+
+Möchte man das Bild im Fließtext einbinden, darf der Link nicht allein
+in einer Zeile stehen.
+
+\begin{verbatim}
+Das ![Rotes Quadrat](rot.png "rote Quadrat") im Fließtext.
+\end{verbatim}
+
+Es gibt keine Möglichkeit, die Bilder zu skalieren, sie müssen in der
+richtigen Größe und Auflösung vorliegen.
+
+\section{Am Wegesrand}
+
+Pandoc kann auch ConTeXt-Dateien erstellen. Damit könnte man vorhandene
+LaTeX-Dateien konvertieren, um den Einstieg in ConTeXt~zu finden.
+
+ConTeXt~kann mithilfe des Filter Moduls sogar direkt Markdown bearbeiten
+indem es pandoc als Filter aufruft. Näheres hierzu gibt es im Pandoc
+Extra Wiki~\autocite{pandoc-extra}.
+
+\section{Reiseliteratur: Große Dokumente \ldots{}}
+
+Standardmäßig erstellt pandoc Dokumente ohne Abschnittsnummerierung und
+ohne Inhaltsverzeichnis. Bei kurzen Texten ist das sicher kein Problem,
+bei längere Texten muss man nicht darauf verzichten. Mit:
+
+\begin{verbatim}
+pandoc -f markdown -t latex --number-sections 
+    -o quelle.tex quelle.md
+\end{verbatim}
+
+erhält man die Abschnittsnummern und mit:
+
+\begin{verbatim}
+pandoc -f markdown -t latex --toc -o quelle.tex quelle.md
+\end{verbatim}
+
+das Inhaltsverzeichnis. Beides kann man natürlich auch kombinieren.
+
+\section{\ldots{}~oder ganze Bücher}
+
+Wenn keine Dokumentklasse angegeben wird, benutzt pandoc standardmäßig
+die Klasse \texttt{article}, bzw. wenn die Option \texttt{-{}-chapters}
+gewählt wurde, die Klasse \texttt{book}.
+
+Durch das setzen einer Variablen, kann man die gewünschte Dokumentklasse
+auswählen, dabei werden \texttt{report}, \texttt{book}, \texttt{memoir},
+\texttt{scrreprt} und \texttt{scrbook} automatisch erkannt und die
+Option \texttt{-{}-chapters} gesetzt.
+
+Bei älteren pandoc Versionen (\textless{}1.9) war dies nicht möglich.
+Pandoc hat hier die Dokumentklasse aus der Template Datei gelesen und
+bei \texttt{report}, \texttt{book} und \texttt{memoir} auf Kapitel als
+oberste Gliederungsebene umgeschaltet.
+
+Bei \texttt{scrreprt} und \texttt{scrbook} musste man Kapitel durch eine
+Option aktivieren:
+
+\begin{verbatim}
+# pandoc >=1.9
+pandoc -f markdown -t latex -V documentclass=srcreprt -s
+    -o quelle.tex quelle.md
+
+# pandoc <1.9
+pandoc -f markdown -t latex --template=./komascript.latex 
+    --chapters -o quelle.tex quelle.md
+\end{verbatim}
+
+Die Datei \texttt{monster.latex} ist ein Versuch möglichst viele
+konfigurierbare Optionen in eine Vorlage zu bringen. Durch die Vielzahl
+an Optionen ist diese Datei nur noch über Skripte sinnvoll nutzbar, da
+kaum jemand alle Optionen jedes mal von Hand eintippen möchte.
+
+Der Quelltext kann in mehrere Dateien aufgeteilt werden, allerdings
+bietet pandoc keinen mit
+\texttt{\textbackslash{}include}/\texttt{\textbackslash{}includeonly}
+vergleichbaren Mechanismus. Stattdessen hängt man die Dateinamen einfach
+an den Befehlsaufruf an:
+
+\begin{verbatim}
+pandoc -f markdown -t latex --number-sections --toc 
+    --template=./report.latex -o md-test.tex 
+    md-test-intro.md 
+    md-test-ch1.md 
+    md-test-ch2.md 
+    md-test-ch3.md
+\end{verbatim}
+
+\section{Kein Ziel ohne Quellen}
+
+Verweise ins Literaturverzeichnis werden in eckige Klammern gesetzt und
+erhalten das \texttt{@}-Zeichen sowie den Zitierschlüssel. Es können
+mehrere Quelle in einem Befehl zitiert werden. Kann ein Verweis nicht
+aufgelöst werden, so bleibt der Zitierschlüssel im Text, es gibt keine
+Fehlermeldung!
+
+\begin{verbatim}
+<http://johnmacfarlane.net/pandoc/>[@pandoc]
+Dieser Artikel erschien in [@Ziele-dtk; @Ziele-TUGboat; @Ziele-ct]
+\end{verbatim}
+
+Pandoc kann \texttt{bibTeX}-Dateien lesen und mit Hilfe von CSL
+(Citation Style Language) formatieren. Stile für verschiedene Zeitungen
+und Organisationen stehen unter~\autocite{csl} zur Verfügung. Ohne
+explizite Angabe wird ein Chicago Autor--Datum Stil verwendet.
+
+Das Literaturverzeichnis wird an das Dokument angehängt, dabei wird die
+letzte Überschrift als Titel des Verzeichnisses benutzt. Sollte es nach
+dieser Überschrift noch weiteren Text geben, so wird er vor dem
+eigentlichen Verzeichnis ausgegeben, z. B. für eine Einleitung zum
+Literaturverzeichnis.
+
+\begin{verbatim}
+pandoc -f markdown -t latex --bibliography quelle.bib --csl apa.csl 
+    -o quelle.tex quelle.md
+\end{verbatim}
+
+Diese Methode hat den Vorteil, das sie mit allen Ausgabeformaten
+funktioniert und keinen weiteren TeX-Lauf benötigt. Sie hat jedoch den
+Nachteil, das im erzeugten PDF keine Links auf das Literaturverzeichnis
+verweisen. Außerdem gibt es Probleme mit LaTeX-Befehlen in der
+\texttt{bib}-Datei, das TeX~in TeXnische Komödie wird falsch
+wiedergegeben.
+
+Bei der Ausgabe einer TeX-Datei kann man alternativ auch
+\texttt{biblatex} verwenden. In Verbindung mit \texttt{hyperref}
+entstehen so Links in das Literaturverzeichnis. Die Sortierung erfolgt
+dann mit \texttt{bibtex} oder \texttt{biber}, die Formatierung über
+entsprechende \texttt{biblatex} Stile. Es sind zusätzliche LaTeX~Läufe
+erforderlich.
+
+\begin{verbatim}
+pandoc -f markdown -t latex --bibliography quelle.bib --biblatex 
+    -o quelle.tex quelle.md
+\end{verbatim}
+
+\section{Fazit}
+
+Anders als bei LaTeX ist die Einarbeitung in Markdown sehr einfach.
+Solange die Standardmöglichkeiten ausreichen bietet Markdown als
+Eingabeformat nur Vorteile: weniger Tipparbeit, übersichtlicherer Text.
+Trotzdem befindet sich im Hintergrund ein komplettes LaTeX System, auf
+das jederzeit zurückgreifen kann. Zum Anpassen der Template Datei sind
+LaTeX Kenntnisse erforderlich und man sollte auch im Betrieb einen LaTeX
+Experten zur Hand haben, falls es mal hakt. Aber es hakt deutlich
+weniger, jedenfalls solange man auf rohes LaTeX verzichtet.
+
+Reichen irgendwann die Fähigkeiten von Pandoc nicht mehr aus, hat man ja
+immer noch eine LaTeX Datei als Zwischenprodukt. Diese kann dann z. B.
+mit \texttt{\textbackslash{}index} Befehlen erweitert werden.
+
+Die Möglichkeit neben PDF~auch andere Formate zu erstellen ist ein
+deutlicher Gewinn. Nun kann aus einer Quelle ein pBuch, ein eBuch und
+eine Webseite erstellt werden.
+
+Was fehlt ist ein Editor der Pandoc per Knopfdruck aufruft und somit den
+Ausflug in die Kommandozeile erspart. Natürlich ist eine Integration in
+Vim oder Emacs kein Problem, aber das sind nicht die Editoren, die ein
+Einsteiger nutzen wird. Für TeXshop gibt es bereits engines für die
+wichtigsten Aufgaben (Zielformate PDF und ePUB), bei anderen Editoren
+sieht es noch schlecht aus.
+
+\section{Lizenz}
+
+Dieser Artikel und das Begleitmaterial unterliegen eine Creative Commons
+Namensnennung--Weitergabe unter gleichen Bedingungen Lizenz der Version
+3.0. Weitere Informationen unter
+\url{http://creativecommons.org/licenses/by-sa/3.0/de/}
+
+\section{Anhang}
+
+Im Begleitmaterial befinden sich folgende Dateien:
+
+\begin{description}
+\item[md-test.md]
+Die Beispiele aus diesem Artikel
+\item[md-test.bib]
+Eine \texttt{bibtex} Datei für das Literaturverzeichnis.
+\item[md-test.tex]
+Konvertiert nach LaTeX.
+\item[md-test.pdf]
+Mit pdfLaTeX~gesetzt.
+\item[md-test.epub]
+Konvertiert nach ePUB
+\item[default-de.latex, report-de.latex, komascript.latex,
+monster.latex]
+Ein paar LaTeX-Vorlagen zum Erstellen deutscher Texte.
+\item[reference-de.odt]
+Eine OpenOffice-Vorlage zum Erstellen deutscher Texte.
+\item[dtk2mdtex.sed]
+Eine sed Datei zum Entfernen der \texttt{dtk}-spezifischen Auszeichnung.
+\item[pandoc.pdf]
+Die pandoc-Manpage.
+\item[pandoc-markdown.pdf]
+Die Manpage, die den Markdown Syntax von pandoc beschreibt.
+\item[Kommandozeilen.txt]
+Eine Sammlung von Kommandozeilen, um Tipparbeit zu sparen.
+\end{description}
+
+\printbibliography
+
+\end{document}
