@@ -551,7 +551,8 @@ u.U. der letzte Punkt der Liste anders formatiert als die übrigen
 Punkte.
 
 Beim OpenDocument- oder LaTeX-Export werden beide Fälle gleich
-behandelt.
+behandelt. Ab Version 1.10 wird auch beim LaTeX-Export zwischen
+kompakten Listen und Listen mit mehr Freiraum unterschieden.
 
     Gelse
       : ein kleines Tier, das östlich des Semmering Touristen verjagt.
