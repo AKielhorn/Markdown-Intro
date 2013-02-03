@@ -3,7 +3,7 @@ Eine deutschen Einführung in Markdown (pandoc Dialekt)
 Mit Beispieldatei und Makefile zur Konvertierung in diverse Format.
 Für diejenigen, die kein Make auf ihrem Rechner haben gibt es
 eine Sammlung von Kommandozeilen, die man einfach kopieren und
-in der Shell bzw. Eingabeiaufforderung einfügen kann.
+in der Shell bzw. Eingabeaufforderung einfügen kann.
 
 Außerdem 3 LaTeX-templates mit Optimierungen für deutsche Texte als
 Basis für eigene Experimente.
@@ -19,4 +19,12 @@ mehr notwendig.
 
     -V documentclass=report
     -V documentclass=scrrprt
+
+Pandoc 1.10 Erweiterungen eingepflegt:
+
+ -  Neues Template für 1.10
+ -  Beschreibung Pipe-Tabelle
+ -  Beschreibung Zeilenblock
+ -  Syntax highlight Beschreibung erweitert
+ -  Römische Zahlen in Aufzählungen.
 
