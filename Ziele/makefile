@@ -25,16 +25,16 @@ mobi:	$(DOC).mobi
 
 kindle:	$(DOC).mobi
 
-$(DOC).html: 	$(QUELLEN)
+$(DOC).html: 	$(QUELLEN) makefile
 	$(PANDOC) -f markdown $(DOC).md -s --toc --bibliography $(DOC).bib -o $(DOC).html
 
 $(DOC).txt:	$(QUELLEN)
 	$(PANDOC) -f markdown -t plain -s $(DOC).md --bibliography $(DOC).bib -o $(DOC).txt
 
-$(DOC).tex:	$(DOC).md $(DOC).bib default-de-1.10.latex
-	$(PANDOC) -f markdown $*.md -t latex -V documentclass=article --no-tex-ligatures -S --template=./default-de-1.10.latex --bibliography $*.bib --biblatex -o $*.tex
+$(DOC).tex:	$(DOC).md $(DOC).bib default-de-1.12.latex
+	$(PANDOC) -f markdown $*.md -t latex -V documentclass=article --no-tex-ligatures -S --template=./default-de-1.12.latex --bibliography $*.bib --biblatex -o $*.tex
 #	Für Pandoc 1.9 anderes Template verwenden
-	$(PANDOC) -f markdown $*.md -t latex -V documentclass=article --no-tex-ligatures -S --template=./default-de-1.10.latex --bibliography $*.bib --biblatex -o $*.tex
+#	$(PANDOC) -f markdown $*.md -t latex -V documentclass=article --no-tex-ligatures -S --template=./default-de-1.9.latex --bibliography $*.bib --biblatex -o $*.tex
 #	Standard pandoc template
 #	$(PANDOC) -f markdown $*.md -t latex -V documentclass=article -V lang=ngerman --no-tex-ligatures -S -s --bibliography $*.bib --biblatex -o $*.tex
 
