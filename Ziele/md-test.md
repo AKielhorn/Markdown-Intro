@@ -4,6 +4,14 @@
   Babel Fisch (Übers.)
 % DTK 2011-3
 
+---
+Kommentar_: Alternative Möglichkeit einen Titelblock zu definieren.
+title: Viele Ziele
+author: Axel Kielhorn
+tags: [Einführung, deutsch]
+Normseiten_: Zum Erstellen von Normseiten _ in der nächsten Zeile entfernen.
+norm_: 1
+...
 # Ein Weg führt zu einem Ziel
 
 Bisher war das Ziel meiner Veröffentlichungen immer Papier: DIN A4,
@@ -28,6 +36,10 @@ Erste Ebene
 
 Zweite und letzte Ebene
 -----------------------
+
+### Die dritte Ebene erhält keine Nummer {-}
+
+### Noch eine dritte Ebene ohne Nummer {.unnumbered}
 
 > Hier zitiere ich eine alte E-Mail
 >
