@@ -1,6 +1,6 @@
 % Viele Ziele Veröffentlichung
 % Axel Kielhorn
-% 2013-02-03
+% 2014-02-08
 
 Anmerkung
 =========
@@ -12,6 +12,7 @@ TeXnische Komödie" 3/2011 in LaTeX geschrieben. Eine englische Übersetzung ers
 Mit dem Erscheinen von pandoc 1.9 wurde er nach `markdown` konvertiert.
 Durch eine angepasste `template` Datei wird das Aussehen des Originalartikels nachgebildet.
 
+Die aktuelle Version beschreibt pandoc 1.12.
 
 Ein Weg führt zu einem Ziel
 ===========================
@@ -859,6 +860,36 @@ in einer Zeile stehen.
 
 Es gibt keine Möglichkeit, die Bilder zu skalieren, sie müssen in der
 richtigen Größe und Auflösung vorliegen.
+
+YAML
+----
+
+Ab Version 1.12.2 versteht `pandoc` auch YAML Metadaten.
+Eine YAML-Bloch wird durch 3 `-` Zeichen eingeleitet und durch dre `.`
+Zeichen beendet. Nach den `---` darf keine Leerzeile stehen, sonst werden
+sie als Trennstrich interpretiert.
+
+Damit lassen sich im Dokument Variablen definieren. Wenn der Inhalt der
+Variablen mehrere Absätze umfasst, so ist er mit einem `|` Zeichen
+einzuleiten. Die Absätze sind vier Zeichen einzurücken:
+
+    ---
+    abstract: |
+        Dies ist eine Zusammenfassung.
+
+        Sie umfasst mehrere Absätze. Das wäre nicht notwendig gewesen,
+        es dient nur zur Demonstration.
+    ...
+
+Bei der ePUB-Erstellung können außerdem das Umschlagbild sowie die zu
+benutzende `css`-Datei angegeben werden.
+
+    ---
+    language: de_de
+    cover-image: ./Bild.jpg
+    stylesheet: ./epub.css
+    ...
+
 
 Am Wegesrand
 ============
