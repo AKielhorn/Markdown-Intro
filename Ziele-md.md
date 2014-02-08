@@ -2,6 +2,11 @@
 % Axel Kielhorn
 % 2014-02-08
 
+---
+bibliography: ./Ziele-md.bib
+csl: ./Ziele.csl
+...
+
 Anmerkung
 =========
 
@@ -1001,6 +1006,17 @@ Nachteil, das im erzeugten PDF keine Links auf das Literaturverzeichnis
 verweisen. Außerdem gibt es Probleme mit LaTeX-Befehlen in der
 `bib`-Datei, das TeX in TeXnische Komödie wird falsch wiedergegeben.
 
+Mit pandoc 1.12 hat sich die Bearbeitung des Literaturverzeichnisses
+geändert. Soll das Literaturverzeichnis von pandoc erstellt werden, so muss
+pandoc mit der Option `--filter pandoc-citeproc` aufgerufen
+werden. Die Literaturdatenbank und die CSL-Datei müssen als YAML Metatdaten
+übergeben werden.
+
+    ---
+    bibliography: ./Ziele-md.bib
+    csl: ./Ziele.csl
+    ...
+
 Bei der Ausgabe einer TeX-Datei kann man alternativ auch `biblatex`
 verwenden. In Verbindung mit `hyperref` entstehen so Links in das
 Literaturverzeichnis. Die Sortierung erfolgt dann mit `bibtex` oder
@@ -1082,6 +1098,9 @@ pandoc-markdown.pdf
 
 Kommandozeilen.txt
   ~ Eine Sammlung von Kommandozeilen, um Tipparbeit zu sparen.
+
+Literaturverzeichnis
+====================
 
 [^1]: pandoc ist unter GPL lizensiert.
 
