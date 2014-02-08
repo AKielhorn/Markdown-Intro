@@ -11,6 +11,11 @@ author: Axel Kielhorn
 tags: [Einführung, deutsch]
 Normseiten_: Zum Erstellen von Normseiten _ in der nächsten Zeile entfernen.
 norm_: 1
+abstract: |
+    Dies ist eine Zusammenfassung.
+
+    Sie umfasst mehrere Absätze. Das wäre nicht notwendig gewesen,
+    es dient nur zur Demonstration.
 ...
 # Ein Weg führt zu einem Ziel
 
