@@ -779,6 +779,18 @@ Fußnotentext.
 
         Sie enthält einen zweiten Absatz.
 
+Wenn man ein Buch in mehrere Dateien aufteilt, kann es beim zusammensetzen
+zu doppelten Fußnoten kommen. Eine einfache Möglichkeit, das zu umgehen ist
+das neuformatieren jeder Datei mit dem Befehl:
+
+    pandoc -s -o datei.md datei.md --id-prefix datei:
+
+Dabei wird jeder Fußnote der Prefix `datei:` zugeordnet, somit sind die
+Namen einheitlich. (Für `datei` ist der jeweilige Name der einzelnen Dateien
+einzusetzen.)[^fnJR]
+
+[^fnJR]: Vielen Dank an Jesse Rosenthal für diesen Hinweis.
+
 Auf eBook-Lesegeräten ist ein hochgestelles Fußnotensymbol oft zu klein.
 Mit folgender Definition in der `epub.css` Datei werden die Symbole in
 Textgröße mit eine eckigen Klammer dargestellt.[^epubWL]
