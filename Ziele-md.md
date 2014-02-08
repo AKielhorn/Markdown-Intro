@@ -731,6 +731,10 @@ sind optional.
 	|   123  | 123   | 123      |    123    |
 	|     1  | 1     | 1        |     1     |
 
+Pandoc benutzt jetzt `longtable` anstelle von `ctable`. Damit ist es möglich
+Tabellen zu erstellen, die am Seitenende umgebrochen werden. Ab Version
+1.12.3 wird zusätzlich das Paket `booktabs` verwendet. Dadurch sehen die
+Tabellen etwas besser aus. Templates müssen angepasst werden.
 
 Titelei
 -------
