@@ -26,29 +26,29 @@ mobi:	$(DOC).mobi
 kindle:	$(DOC).mobi
 
 $(DOC).html: 	$(QUELLEN) makefile
-	$(PANDOC) -f markdown $(DOC).md -s --toc --bibliography $(DOC).bib -o $(DOC).html
+	$(PANDOC) -f markdown --filter pandoc-citeproc $(DOC).md -s --toc --bibliography $(DOC).bib -o $(DOC).html
 
-$(DOC).txt:	$(QUELLEN)
-	$(PANDOC) -f markdown -t plain -s $(DOC).md --bibliography $(DOC).bib -o $(DOC).txt
+$(DOC).txt:	$(QUELLEN) makefile
+	$(PANDOC) -f markdown --filter pandoc-citeproc -t plain -s $(DOC).md --bibliography $(DOC).bib -o $(DOC).txt
 
-$(DOC).tex:	$(DOC).md $(DOC).bib default-de-1.12.latex
+$(DOC).tex:	$(DOC).md $(DOC).bib default-de-1.12.latex makefile
 	$(PANDOC) -f markdown $*.md -t latex -V documentclass=article --no-tex-ligatures -S --template=./default-de-1.12.latex --bibliography $*.bib --biblatex -o $*.tex
 #	Für Pandoc 1.9 anderes Template verwenden
 #	$(PANDOC) -f markdown $*.md -t latex -V documentclass=article --no-tex-ligatures -S --template=./default-de-1.9.latex --bibliography $*.bib --biblatex -o $*.tex
 #	Standard pandoc template
 #	$(PANDOC) -f markdown $*.md -t latex -V documentclass=article -V lang=ngerman --no-tex-ligatures -S -s --bibliography $*.bib --biblatex -o $*.tex
 
-$(DOC).pdf:	$(DOC).md $(DOC).bib default-de-1.12.latex
+$(DOC).pdf:	$(DOC).md $(DOC).bib default-de-1.12.latex makefile
 	$(PANDOC) $(DOC).md --filter pandoc-citeproc --no-tex-ligatures --template=./default-de-1.12.latex -o $(DOC).pdf
 
-$(DOC).epub:	$(QUELLEN)
-	$(PANDOC) -f markdown $(DOC).md --toc --epub-cover-image=cover-image.gif -V lang=de_DE -s --bibliography $(DOC).bib -o $(DOC).epub
+$(DOC).epub:	$(QUELLEN) makefile
+	$(PANDOC) -f markdown $(DOC).md --filter pandoc-citeproc --toc --epub-cover-image=cover-image.gif -V lang=de_DE -s --bibliography $(DOC).bib -o $(DOC).epub
 
-$(DOC).odt: $(QUELLEN) reference-de.odt
-	$(PANDOC) -f markdown -t odt --reference-odt=./reference-de.odt -s --bibliography $(DOC).bib -o $(DOC).odt $(DOC).md
+$(DOC).odt: $(QUELLEN) reference-de.odt makefile
+	$(PANDOC) -f markdown -t odt --filter pandoc-citeproc --reference-odt=./reference-de.odt -s --bibliography $(DOC).bib -o $(DOC).odt $(DOC).md
 
-$(DOC).docx: $(QUELLEN) reference-de.docx
-	$(PANDOC) -f markdown -t odt --reference-docx=./reference-de.docx -s --bibliography $(DOC).bib -o $(DOC).docx $(DOC).md
+$(DOC).docx: $(QUELLEN) reference-de.docx makefile
+	$(PANDOC) -f markdown -t odt --filter pandoc-citeproc --reference-docx=./reference-de.docx -s --bibliography $(DOC).bib -o $(DOC).docx $(DOC).md
 
 # Erfordert kindlegen von amazon.com
 # Erfordert pandoc >= 1.9
