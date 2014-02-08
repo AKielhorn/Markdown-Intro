@@ -248,4 +248,9 @@ Dies ist eine Fußnotenmarkierung[^1] und dies eine weitere[^fussnote]
 
 # Literaturverzeichnis
 
+---
+bibliography: md-test.bib
+csl: apa.csl
+...
+
 Post Scriptum
