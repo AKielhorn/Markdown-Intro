@@ -154,17 +154,15 @@ $endif$
 \usepackage{typearea}
 $if(norm)$
 \usepackage[baselinestretch=1.2,hyphen=false]{stdpage}
-% A5 papier
-\setlength{\paperwidth}{14.8cm}
-\setlength{\paperheight}{21cm}
-\typearea[2mm]{13}
-
+% optional: A5 papier
+% \setlength{\paperwidth}{14.8cm}
+% \setlength{\paperheight}{21cm}
+% \typearea[2mm]{13}
 $else$
-% Taschenbuch
-\setlength{\paperwidth}{12cm}
-\setlength{\paperheight}{19cm}
-\typearea[2mm]{14}
-
+% optional: A5 papier
+% \setlength{\paperwidth}{14.8cm}
+% \setlength{\paperheight}{21cm}
+% \typearea[2mm]{13}
 $endif$
 
 \begin{document}
