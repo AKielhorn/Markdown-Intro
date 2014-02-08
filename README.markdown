@@ -28,3 +28,10 @@ Pandoc 1.10 Erweiterungen eingepflegt:
  -  Syntax highlight Beschreibung erweitert
  -  Römische Zahlen in Aufzählungen.
 
+Pandoc 1.12 Erweiterungen eingepflegt:
+
+ - Neues Template für 1.12
+ - Booktabs für Tabellen
+ - YAML für Variablen und Metadaten
+   (Literaturverzeichnis, Abstract, epub)
+
