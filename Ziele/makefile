@@ -38,8 +38,8 @@ $(DOC).tex:	$(DOC).md $(DOC).bib default-de-1.12.latex
 #	Standard pandoc template
 #	$(PANDOC) -f markdown $*.md -t latex -V documentclass=article -V lang=ngerman --no-tex-ligatures -S -s --bibliography $*.bib --biblatex -o $*.tex
 
-$(DOC).pdf:	$(DOC).tex
-	latexmk -pdf $(DOC)
+$(DOC).pdf:	$(DOC).md $(DOC).bib default-de-1.12.latex
+	$(PANDOC) $(DOC).md --no-tex-ligatures --template=./default-de-1.12.latex --bibliography $(DOC).bib --biblatex -o $(DOC).pdf
 
 $(DOC).epub:	$(QUELLEN)
 	$(PANDOC) -f markdown $(DOC).md --toc --epub-cover-image=cover-image.gif -V lang=de_DE -s --bibliography $(DOC).bib -o $(DOC).epub
