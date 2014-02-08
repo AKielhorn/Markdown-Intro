@@ -104,13 +104,13 @@
 
 \title{Viele Ziele Veröffentlichung}
 \author{Axel Kielhorn}
-\date{2013-02-03}
+\date{2014-02-08}
 \usepackage{csquotes}
 
 \begin{document}
 \maketitle
 
-\section{Anmerkung}
+\section{Anmerkung}\label{anmerkung}
 
 Dieser Artikel wurde ursprünglich für die dante Vereinszeitschrift
 \enquote{Die TeXnische Komödie} 3/2011 in LaTeX geschrieben. Eine
@@ -121,7 +121,10 @@ Mit dem Erscheinen von pandoc 1.9 wurde er nach \texttt{markdown}
 konvertiert. Durch eine angepasste \texttt{template} Datei wird das
 Aussehen des Originalartikels nachgebildet.
 
-\section{Ein Weg führt zu einem Ziel}
+Die aktuelle Version beschreibt pandoc 1.12.
+
+\section{Ein Weg führt zu einem
+Ziel}\label{ein-weg-fuxfchrt-zu-einem-ziel}
 
 Bisher war das Ziel meiner Veröffentlichungen immer Papier: DIN~A4,
 DIN~A5 oder auch mal 9~cm $\times$ 12~cm. Auf dem Weg dahin entstand
@@ -139,7 +142,7 @@ anderes als ein ZIP-Archiv mit einer definierten Struktur und ein paar
 XML-Dateien, die den eigentlichen Text enthalten. Das Aussehen kann
 durch eine css-Datei gesteuert werden.
 
-\section{Eine Umleitung}
+\section{Eine Umleitung}\label{eine-umleitung}
 
 Zum Glück gibt es ein Programm, das LaTeX~lesen und ePUB schreiben kann:
 pandoc\autocite{pandoc}\footnote{pandoc ist unter GPL lizensiert.}. Wenn
@@ -158,7 +161,7 @@ erstellen.\footnote{Das Begleitmaterial zu diesem Artikel befindet sich
   auf
   \url{https://github.com/AKielhorn/Markdown-Intro/blob/master/Ziele.zip}}
 
-\subsection{Die Steine auf dem Weg}
+\subsection{Die Steine auf dem Weg}\label{die-steine-auf-dem-weg}
 
 Pandoc arbeitet mit UTF-8 Dateien. Latin-1 Texte lassen sich leicht
 konvertieren, Umlaute gemäß \texttt{german.sty} gehen jedoch verloren.
@@ -171,13 +174,14 @@ Einfache Auszeichnungsbefehle für \textbf{fett} und \emph{kursiv} werden
 unterstützt, doch schon beim geschachteltem
 \texttt{\textbackslash{}emph} ist Schluss.
 
-\section{Ein neuer Anfang}
+\section{Ein neuer Anfang}\label{ein-neuer-anfang}
 
 Steht die LaTeX-Datei wirklich am Anfang? Oder sollten wir nicht lieber
 LaTeX~als \emph{ein} Backend verstehen und die LaTeX-Datei somit nur als
 ein Zwischenprodukt?
 
-\section{Eine ungewöhnliche Richtung: Markdown statt markup}
+\section{Eine ungewöhnliche Richtung: Markdown statt
+markup}\label{eine-ungewuxf6hnliche-richtung-markdown-statt-markup}
 
 Markdown ist eine von John Gruber\autocite{gruber} entwickelte
 Auszeichnungssprache, die so aussieht, als ob sie keine Auszeichnungen
@@ -224,14 +228,16 @@ interpretieren. Das hat zur Folge, das bei einigen Befehlen zusätzliche
 Leerzeilen erforderlich sind, damit pandoc die Befehle von normalem Text
 unterscheiden kann.
 
-\section{Auf neuem Weg zum alten Ziel: PDF aus Markdown über LaTeX}
+\section{Auf neuem Weg zum alten Ziel: PDF aus Markdown über
+LaTeX}\label{auf-neuem-weg-zum-alten-ziel-pdf-aus-markdown-uxfcber-latex}
 
 \begin{verbatim}
 pandoc -f markdown -t latex --template=./default-de.latex 
     -o quelle.tex quelle.md
 \end{verbatim}
 
-\subsection{Die \texttt{default-de.latex} Dateien}
+\subsection{Die \texttt{default-de.latex}
+Dateien}\label{die-default-de.latex-dateien}
 
 Die mitgelieferte \texttt{default.latex} Datei ist eine Minimalversion.
 Für deutsche Texte empfiehlt sich die erweiterte
@@ -302,9 +308,9 @@ Probleme.
 Seit pandoc 1.9.3 gibt es einen neuen Schalter
 \texttt{-{}-no-tex-ligatures} mit dem die Übersetzung von
 Unicode-Zeichen in TeX-Ligaturen abgeschaltet werden kann. \texttt{„}
-und \texttt{``} werden dann unverändert in den TeX Text übernommen.
-Gleichzeitig wird die Übersetzung von \texttt{-{}-} in \texttt{--} und
-\texttt{-{}-{}-} in \texttt{---} abgeschaltet. Diese Zeichen müssen dann
+und \texttt{“} werden dann unverändert in den TeX Text übernommen.
+Gleichzeitig wird die Übersetzung von \texttt{-{}-} in \texttt{–} und
+\texttt{-{}-{}-} in \texttt{—} abgeschaltet. Diese Zeichen müssen dann
 durch TeX konvertiert werden. Bei \texttt{pdflatex} ist das
 standardmäßig der Fall, bei \texttt{XeTeX} und \texttt{LuaTeX} muss die
 \texttt{fontspec} Option \texttt{Ligatures=TeX} gesetzt werden.
@@ -335,7 +341,7 @@ s/”/“/g
 Natürlich kann man alternativ auch \texttt{»} und \texttt{«} als
 Ersetzungstext benutzen
 
-\subsection{Abkürzung}
+\subsection{Abkürzung}\label{abkuxfcrzung}
 
 Der schnellste Weg aus einer Markdown-Datei ein PDF zu erstellen ist:
 
@@ -365,13 +371,14 @@ Bei älteren pandoc Versionen übernimmt das mitgelieferte Programm
 markdown2pdf --template=./default-de.latex quelle.md
 \end{verbatim}
 
-\subsection{Nacharbeit}
+\subsection{Nacharbeit}\label{nacharbeit}
 
 Die automatisch erstellte LaTeX-Datei ist fast so gut wie eine von einem
 Anfänger manuell erstellte. Natürlich wird man auch hier mit Trennhilfen
 und ähnlichem die overfull und underfull hboxes beseitigen müssen.
 
-\section{Der Weg zu einem neuen Ziel: ePUB}
+\section{Der Weg zu einem neuen Ziel:
+ePUB}\label{der-weg-zu-einem-neuen-ziel-epub}
 
 Der ursprüngliche Wunsch war es, eine ePUB Datei zu erstellen. Dies
 geschieht mit dem Befehl:
@@ -417,7 +424,7 @@ Gute Erfahrungen habe ich mit GNU Freefont
 (\url{http://savannah.gnu.org/projects/freefont/}) und DejaVu
 (\url{http://dejavu-fonts.org/wiki/index.php}) gemacht.
 
-\subsection{Ein Lagerfeuer}
+\subsection{Ein Lagerfeuer}\label{ein-lagerfeuer}
 
 Es gibt zwei Wege, um aus ePUB Dateien Dokumente für den
 Kindle\footnote{Kindle ist wahrscheinlich ein eingetragenes Warenzeichen
@@ -485,7 +492,7 @@ ebook-convert quelle.epub quelle.mobi -h
 \end{verbatim}
 \end{enumerate}
 
-\section{Sehen wo ich gehe: WYSIWYG}
+\section{Sehen wo ich gehe: WYSIWYG}\label{sehen-wo-ich-gehe-wysiwyg}
 
 \enquote{Kann ich das als Word-Datei haben?} Wer kennt diese Frage
 nicht? Mit pandoc 1.9 ist es möglich eine \texttt{docx} Datei zu
@@ -525,7 +532,7 @@ Eingebundene Bilder werden auf Einheitsgröße zusammengestaucht und
 müssen jeweils einzeln auf Originalgröße expandiert werden. Dieser
 Fehler wurde mit pandoc 1.9 behoben.
 
-\section{Reisevorbereitung}
+\section{Reisevorbereitung}\label{reisevorbereitung}
 
 Mit einem kleinen \texttt{sed}-Skript lässt sich diese
 \texttt{dtk}-basierte LaTeX-Quelle in eine neutrale LaTeX-Datei
@@ -561,9 +568,9 @@ pandoc -f latex -t markdown -s -o Ziele-clean.md  Ziele-clean.tex
 
 nach Markdown konvertiert werden.
 
-\section{Wegbeschreibung}
+\section{Wegbeschreibung}\label{wegbeschreibung}
 
-\subsection{Gliederungsbefehle}
+\subsection{Gliederungsbefehle}\label{gliederungsbefehle}
 
 Markdown unterstützt bis zu 6 Gliederungsebenen. Die Gliederungsstufe
 wird durch die Anzahl der \texttt{\#} Zeichen vorgegeben. Vor jeder
@@ -595,7 +602,7 @@ Standardmäßig erzeugt pandoc beim konvertieren nach Markdown dieses
 Format. Mit der Option \texttt{-{}-atx-headers} werden Überschriften im
 ersten Format erstellt.
 
-\subsection{Zitatumgebung}
+\subsection{Zitatumgebung}\label{zitatumgebung}
 
 Zitiert wird wie in (alten) E-Mail Programmen mit einem
 \texttt{\textgreater{}}
@@ -684,11 +691,11 @@ Stile auswählen. Zur Auswahl stehen: \emph{pygments} (the default),
 Die Hervorhebung funktioniert nur bei den Ausgabeformaten \texttt{HTML}
 und \texttt{LaTeX}.
 
-\subsection{Listen}
+\subsection{Listen}\label{listen}
 
 Aus LaTeX~kennen wir verschiedene Listenformen:
 
-\subsubsection{Die \texttt{itemize} Liste}
+\subsubsection{Die \texttt{itemize} Liste}\label{die-itemize-liste}
 
 Eine Liste wird durch ein Aufzählungszeichen (\texttt{*}, \texttt{+}
 oder \texttt{-}) eingeleitet.
@@ -722,7 +729,7 @@ Um ganz sicher zu gehen, erwähnen wir erst im letzten Absatz
 die vier Leerzeichen Regel.
 \end{verbatim}
 
-\subsubsection{Die \texttt{enumerate} Liste}
+\subsubsection{Die \texttt{enumerate} Liste}\label{die-enumerate-liste}
 
 Das erste Aufzählungszeichen gibt hier das Format der Aufzählungszeichen
 vor (\texttt{1.}, \texttt{(1)} oder \texttt{i.}). Es ist nicht
@@ -765,7 +772,8 @@ erforderlich. Bei Kleinbuchstaben ist das nicht notwendig.
     ii. vier b
 \end{verbatim}
 
-\subsubsection{Die \texttt{description} Liste}
+\subsubsection{Die \texttt{description}
+Liste}\label{die-description-liste}
 
 Endlich kommen wir zu den beliebten \texttt{l2kurz}-Tieren. Das
 beschriebene Objekt steht allein in einer Zeile, die Beschreibung wird
@@ -818,7 +826,7 @@ Gürteltier
 Nächster Absatz
 \end{verbatim}
 
-\subsubsection{Die fortlaufende Liste}
+\subsubsection{Die fortlaufende Liste}\label{die-fortlaufende-liste}
 
 Normalerweise fängt jede neue Liste wieder bei 1 an. Es gibt jedoch eine
 besondere Form, die fortlaufend über das gesamte Dokument läuft,
@@ -839,7 +847,7 @@ Diese Liste benutzt nicht den
 LaTeX~\texttt{\textbackslash{}label}/\texttt{\textbackslash{}ref}-Mechanismus
 und erfordert daher keinen zweiten LaTeX-Lauf.
 
-\subsection{Tabellen}
+\subsection{Tabellen}\label{tabellen}
 
 Seit Version 1.8.1.2 werden Tabellen mit dem \texttt{ctable}-Paket
 gesetzt. Dadurch hat sich die Qualität der Ausgabe erheblich verbessert.
@@ -940,7 +948,13 @@ Zeichen in der ersten und letzten Spalte sind optional.
 |     1  | 1     | 1        |     1     |
 \end{verbatim}
 
-\subsection{Titelei}
+Pandoc benutzt jetzt \texttt{longtable} anstelle von \texttt{ctable}.
+Damit ist es möglich Tabellen zu erstellen, die am Seitenende
+umgebrochen werden. Ab Version 1.12.3 wird zusätzlich das Paket
+\texttt{booktabs} verwendet. Dadurch sehen die Tabellen etwas besser
+aus. Templates müssen angepasst werden.
+
+\subsection{Titelei}\label{titelei}
 
 Angaben zu Titel des Dokuments, den Autoren und dem Datum der Erstellung
 werden am Anfang der Datei angegeben:
@@ -974,7 +988,7 @@ Das ePUB Format fordert ein echtes Datum (2012-02-12) als Argument.
 % 2012-02-12
 \end{verbatim}
 
-\subsection{Fußnoten}
+\subsection{Fußnoten}\label{fuuxdfnoten}
 
 Fußnoten bestehen aus zwei Teilen, der Fußnotenmarkierung und dem
 Fußnotentext.
@@ -990,7 +1004,35 @@ weitere[^fussnote]
     Sie enthält einen zweiten Absatz.
 \end{verbatim}
 
-\subsection{Hervorhebungen}
+Wenn man ein Buch in mehrere Dateien aufteilt, kann es beim
+zusammensetzen zu doppelten Fußnoten kommen. Eine einfache Möglichkeit,
+das zu umgehen ist das neuformatieren jeder Datei mit dem Befehl:
+
+\begin{verbatim}
+pandoc -s -o datei.md datei.md --id-prefix datei:
+\end{verbatim}
+
+Dabei wird jeder Fußnote der Prefix \texttt{datei:} zugeordnet, somit
+sind die Namen einheitlich. (Für \texttt{datei} ist der jeweilige Name
+der einzelnen Dateien einzusetzen.)\footnote{Vielen Dank an Jesse
+  Rosenthal für diesen Hinweis.}
+
+Auf eBook-Lesegeräten ist ein hochgestelles Fußnotensymbol oft zu klein.
+Mit folgender Definition in der \texttt{epub.css} Datei werden die
+Symbole in Textgröße mit eine eckigen Klammer dargestellt.\footnote{Vielen
+  Dank an Werner Lemberg für diese Definition.}
+
+\begin{verbatim}
+a.footnoteRef > sup:before {
+   content: "["; }
+a.footnoteRef > sup {
+   vertical-align: baseline;
+   font-size: 100%; }
+a.footnoteRef > sup:after {
+   content: "]"; }
+\end{verbatim}
+
+\subsection{Hervorhebungen}\label{hervorhebungen}
 
 Kursiver Text wird durch \emph{ein} \texttt{*} oder \texttt{\_}
 eingeschlossen.
@@ -1025,7 +1067,7 @@ H~2~O ist Wasser, 2^10^ ist 1024.
 Die letzte Zeile mag zuerst verwundern, allerdings handelt es sich hier
 nicht um Mathematiksatz sondern um Textexponenten und -indices.
 
-\subsection{Mathematik}
+\subsection{Mathematik}\label{mathematik}
 
 Inline-Mathematik wird wie aus LaTeX~bekannt in \texttt{\$}
 einbeschlossen. Der Inhalt wird direkt an LaTeX~weitergeben, daher ist
@@ -1040,20 +1082,20 @@ Optionen beim Aufruf von pandoc ab, was als Ausgabe erzeugt wird.
 
 Abgesetzte Formeln können als rohes LaTeX~eingegeben werden.
 
-\subsection{Rohes LaTeX}
+\subsection{Rohes LaTeX}\label{rohes-latex}
 
 Alles was zwischen einem
 \texttt{\textbackslash{}begin}/\texttt{\textbackslash{}end} Paar steht
 wird direkt an LaTeX~(oder ConTeXt) weitergegeben und in allen anderen
 Formaten ignoriert.
 
-\subsection{Rohes HTML}
+\subsection{Rohes HTML}\label{rohes-html}
 
 Da Markdown ursprünglich zum Erstellen von HTML-Seiten entwickelt wurde,
 bietet es die Möglichkeit HTML direkt einzugeben. Bei nicht HMTL
 basierten Ausgabeformaten wird es ignoriert.
 
-\subsection{Links}
+\subsection{Links}\label{links}
 
 Bei einem Format, das ursprünglich zum Erstellen von Webseiten gedacht
 war, sollte man annehmen, das es mit Hyperlinks umgehen kann. Und so ist
@@ -1071,7 +1113,7 @@ Die Dokumentation zu pandoc befindet sich auf der
 [pandoc Webseite](http://johnmacfarlane.net/pandoc/).
 \end{verbatim}
 
-\subsection{Bilder}
+\subsection{Bilder}\label{bilder}
 
 Bilder sind eine besondere Form des Links. Wenn vor dem Link ein
 \texttt{!} steht, wird dieser als Link auf ein Bild interpretiert.
@@ -1093,7 +1135,40 @@ Das ![Rotes Quadrat](rot.png "rote Quadrat") im Fließtext.
 Es gibt keine Möglichkeit, die Bilder zu skalieren, sie müssen in der
 richtigen Größe und Auflösung vorliegen.
 
-\section{Am Wegesrand}
+\subsection{YAML}\label{yaml}
+
+Ab Version 1.12.2 versteht \texttt{pandoc} auch YAML Metadaten. Eine
+YAML-Bloch wird durch 3 \texttt{-} Zeichen eingeleitet und durch dre
+\texttt{.} Zeichen beendet. Nach den \texttt{-{}-{}-} darf keine
+Leerzeile stehen, sonst werden sie als Trennstrich interpretiert.
+
+Damit lassen sich im Dokument Variablen definieren. Wenn der Inhalt der
+Variablen mehrere Absätze umfasst, so ist er mit einem
+\texttt{\textbar{}} Zeichen einzuleiten. Die Absätze sind vier Zeichen
+einzurücken:
+
+\begin{verbatim}
+---
+abstract: |
+    Dies ist eine Zusammenfassung.
+
+    Sie umfasst mehrere Absätze. Das wäre nicht notwendig gewesen,
+    es dient nur zur Demonstration.
+...
+\end{verbatim}
+
+Bei der ePUB-Erstellung können außerdem das Umschlagbild sowie die zu
+benutzende \texttt{css}-Datei angegeben werden.
+
+\begin{verbatim}
+---
+language: de_de
+cover-image: ./Bild.jpg
+stylesheet: ./epub.css
+...
+\end{verbatim}
+
+\section{Am Wegesrand}\label{am-wegesrand}
 
 Pandoc kann auch ConTeXt-Dateien erstellen. Damit könnte man vorhandene
 LaTeX-Dateien konvertieren, um den Einstieg in ConTeXt~zu finden.
@@ -1102,7 +1177,8 @@ ConTeXt~kann mithilfe des Filter Moduls sogar direkt Markdown bearbeiten
 indem es pandoc als Filter aufruft. Näheres hierzu gibt es im Pandoc
 Extra Wiki~\autocite{pandoc-extra}.
 
-\section{Reiseliteratur: Große Dokumente \ldots{}}
+\section{Reiseliteratur: Große Dokumente
+\ldots{}}\label{reiseliteratur-grouxdfe-dokumente}
 
 Standardmäßig erstellt pandoc Dokumente ohne Abschnittsnummerierung und
 ohne Inhaltsverzeichnis. Bei kurzen Texten ist das sicher kein Problem,
@@ -1131,7 +1207,7 @@ beeinflussen:
 Die Option \texttt{-{}-toc} wird dabei implizit gesetzt, muss also nicht
 angegeben werden. Das funktioniert auch bei HTML und epub.
 
-\section{\ldots{}~oder ganze Bücher}
+\section{\ldots{}~oder ganze Bücher}\label{oder-ganze-buxfccher}
 
 Wenn keine Dokumentklasse angegeben wird, benutzt pandoc standardmäßig
 die Klasse \texttt{article}, bzw. wenn die Option \texttt{-{}-chapters}
@@ -1180,7 +1256,7 @@ pandoc -f markdown -t latex --number-sections --toc
     md-test-ch3.md
 \end{verbatim}
 
-\section{Kein Ziel ohne Quellen}
+\section{Kein Ziel ohne Quellen}\label{kein-ziel-ohne-quellen}
 
 Verweise ins Literaturverzeichnis werden in eckige Klammern gesetzt und
 erhalten das \texttt{@}-Zeichen sowie den Zitierschlüssel. Es können
@@ -1216,6 +1292,19 @@ verweisen. Außerdem gibt es Probleme mit LaTeX-Befehlen in der
 \texttt{bib}-Datei, das TeX~in TeXnische Komödie wird falsch
 wiedergegeben.
 
+Mit pandoc 1.12 hat sich die Bearbeitung des Literaturverzeichnisses
+geändert. Soll das Literaturverzeichnis von pandoc erstellt werden, so
+muss pandoc mit der Option \texttt{-{}-filter pandoc-citeproc}
+aufgerufen werden. Die Literaturdatenbank und die CSL-Datei müssen als
+YAML Metatdaten übergeben werden.
+
+\begin{verbatim}
+---
+bibliography: ./Ziele-md.bib
+csl: ./Ziele.csl
+...
+\end{verbatim}
+
 Bei der Ausgabe einer TeX-Datei kann man alternativ auch
 \texttt{biblatex} verwenden. In Verbindung mit \texttt{hyperref}
 entstehen so Links in das Literaturverzeichnis. Die Sortierung erfolgt
@@ -1228,7 +1317,7 @@ pandoc -f markdown -t latex --bibliography quelle.bib --biblatex
     -o quelle.tex quelle.md
 \end{verbatim}
 
-\section{Fazit}
+\section{Fazit}\label{fazit}
 
 Anders als bei LaTeX ist die Einarbeitung in Markdown sehr einfach.
 Solange die Standardmöglichkeiten ausreichen bietet Markdown als
@@ -1254,14 +1343,14 @@ Einsteiger nutzen wird. Für TeXshop gibt es bereits engines für die
 wichtigsten Aufgaben (Zielformate PDF und ePUB), bei anderen Editoren
 sieht es noch schlecht aus.
 
-\section{Lizenz}
+\section{Lizenz}\label{lizenz}
 
 Dieser Artikel und das Begleitmaterial unterliegen eine Creative Commons
 Namensnennung--Weitergabe unter gleichen Bedingungen Lizenz der Version
 3.0. Weitere Informationen unter
 \url{http://creativecommons.org/licenses/by-sa/3.0/de/}
 
-\section{Anhang}
+\section{Anhang}\label{anhang}
 
 Im Begleitmaterial befinden sich folgende Dateien:
 
@@ -1291,6 +1380,6 @@ Die Manpage, die den Markdown Syntax von pandoc beschreibt.
 Eine Sammlung von Kommandozeilen, um Tipparbeit zu sparen.
 \end{description}
 
-\printbibliography
+\printbibliography[title=Literaturverzeichnis]
 
 \end{document}
