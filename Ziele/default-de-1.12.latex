@@ -25,6 +25,7 @@ $if(euro)$
 $endif$
 \else % if luatex or xelatex
   \usepackage{fontspec}
+  \newcommand{\euro}{€}
   \ifxetex
     \usepackage{xltxtra,xunicode}
   \fi
