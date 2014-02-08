@@ -779,6 +779,20 @@ Fußnotentext.
 
         Sie enthält einen zweiten Absatz.
 
+Auf eBook-Lesegeräten ist ein hochgestelles Fußnotensymbol oft zu klein.
+Mit folgender Definition in der `epub.css` Datei werden die Symbole in
+Textgröße mit eine eckigen Klammer dargestellt.[^epubWL]
+
+    a.footnoteRef > sup:before {
+       content: "["; }
+    a.footnoteRef > sup {
+       vertical-align: baseline;
+       font-size: 100%; }
+    a.footnoteRef > sup:after {
+       content: "]"; }
+
+[^epubWL]: Vielen Dank an Werner Lemberg für diese Definition.
+
 Hervorhebungen
 --------------
 
